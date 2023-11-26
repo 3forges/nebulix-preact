@@ -20,6 +20,8 @@ const m2dxOptions = {
   autoImports: true,
 };
 
+import preact from "@astrojs/preact";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://nebulix.unfolding.io",
@@ -27,6 +29,7 @@ export default defineConfig({
     mdx({}),
     sitemap(),
     tailwind(),
+    preact(), // added by Pesto Team
     vue({
       appEntrypoint: "/src/pages/_app",
     }),
@@ -102,6 +105,9 @@ export default defineConfig({
     ],
   },
   vite: {
+    ssr: {
+      external: ["svgo"] // added by Pesto Team
+    },
     build: {
       rollupOptions: {
         external: [

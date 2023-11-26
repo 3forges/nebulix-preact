@@ -1,8 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 const plugin = require("tailwindcss/plugin");
+
 module.exports = {
   darkMode: ["class", '[data-theme="dark"]'],
-  content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
+  content: [
+    "./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}",
+    "./node_modules/flowbite/**/*.js",
+    // 'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}',
+  ], // <script src="./node_modules/flowbite-react/dist/flowbite.min.js"></script>
   theme: {
     extend: {
       colors: {
@@ -35,5 +40,6 @@ module.exports = {
         html: { fontSize: "16px" },
       });
     }),
+    require('flowbite/plugin'),
   ],
 };

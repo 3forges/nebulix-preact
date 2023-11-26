@@ -67,7 +67,10 @@ const { categories } = Astro.props;
 
                       {item.details.labels &&
                         item.details.labels.map((name) => (
+                          <>
+                          <span>ALLO</span>
                           <Label name={name} />
+                          </>
                         ))}
                     </h3>
                   </div>
@@ -84,7 +87,10 @@ const { categories } = Astro.props;
                       <div class="flex flex-wrap content-end justify-start">
                         {item.details.allergens &&
                           item.details.allergens.map((name) => (
-                            <Label name={name} />
+                          <>
+                          <span>ALLO</span>
+                          <Label name={name} />
+                          </>
                           ))}
                       </div>
                       <div class="align-end flex flex-col justify-end">

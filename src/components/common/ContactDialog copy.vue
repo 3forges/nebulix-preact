@@ -25,9 +25,7 @@
                 class="input-group z-20 w-full"
                 v-if="contact.topics.length > 1"
               >
-              <!--
-
-                                <Popper
+                <Popper
                   placement="bottom-start"
                   offsetDistance="1"
                   :show="showPopper"
@@ -64,11 +62,6 @@
                     </ul>
                   </template>
                 </Popper>
-
-              -->
-
-
-
 
                 <label
                   class="peer-placeholder-shown:left-4 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-9 peer-focus:scale-75 peer-focus:text-primary"
