@@ -1,4 +1,5 @@
 <template>
+  bob lookin' for imageNav
   <button
     class="fade-in absolute right-0 top-0 z-50 m-4 h-10 w-10"
     :aria-label="translations.close"

@@ -1,4 +1,5 @@
 <template>
+  bob lookin' for NavMobile
   <button
     :aria-label="show ? translations.close : translations.menu"
     @click="toggleMenu()"

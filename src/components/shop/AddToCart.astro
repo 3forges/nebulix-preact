@@ -120,6 +120,7 @@ if (variations && variations.length > 0) {
   >
     <span class={`${!in_stock ? "opacity-70" : ""}`}>
       <ProductPrice price={price} offer={offer_price} client:idle />
+      Salut am bob
       {
         !in_stock && (
           <span class=" text-xs font-normal ">{t("out_of_stock")}</span>
