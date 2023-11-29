@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "preact/compat"
-import "./CartButton.module.css"
+import './CartButton.module.css'
 export interface Shopping {
   value?: any;
 }
@@ -56,12 +56,13 @@ export function CartButton({ children, label = `default label of card button`, o
     btn.current.setAttribute(`${option}`, `${value}`);
   }, []);
 
+  const afterCartCounterTw = `` // `absolute -right-2 top-0 grid h-4 w-4 place-items-center rounded-full border-2 border-current bg-opacity-70 font-bold md:top-1` 
   return (
     <>
       {/* </><transition name="fade"> */}
           <button
           aria-label="label"
-          class={`${!isCartEmpty()?``:`disabled`} cart-btn grid h-full place-items-center`}
+          class={`${!isCartEmpty()?``:`disabled`} ${afterCartCounterTw} cart-btn grid h-full place-items-center`}
           onClick={openCart}
           ref={btn}
           data-count={count.value}
