@@ -46,6 +46,13 @@ SnipCartInit.vue
 VariationButton.vue
   src/components/shop/ProductVariations.astro
 VariationInput.vue
-  src/components/shop/ProductVariations.astro
+  src/components/shop/ProductVariations.astro 
 
 
+## some lighthouse report 
+* shop
+  * muted text-xs text-danger line-throught
+    * => Background and foreground colors do not have a sufficient contrast ratio.
+* menu
+  * button aria-label="Sulphur Dioxide"
+    * => Background and foreground colors do not have a sufficient contrast ratio.
