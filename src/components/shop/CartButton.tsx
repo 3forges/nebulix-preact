@@ -4,6 +4,11 @@ export interface Shopping {
   value?: any;
 }
 
+export interface CartCount {
+  value: number;
+}
+
+
 export interface CartButtonProps {
   label?: String;
   value?: string;
@@ -14,7 +19,9 @@ export interface CartButtonProps {
 export function CartButton({ label = `default label of card button`, option = `pesto`, value = `pesto`}: CartButtonProps) {
  
   const btn = useRef(null)
-  const count = 0
+  const [count, setCount] = useState<CartCount>({
+    value: 0
+  })
   const [shoppingState, setShoppingState] = useState<Shopping>({
     value: {}
   })
@@ -27,16 +34,21 @@ export function CartButton({ label = `default label of card button`, option = `p
   //if (!!window.Snipcart)
   //const SnipcartService = window.Snipcart?
   const openCart = () => {
-    console.log(``);
+    console.log(` invoke [openCart]`);
     if (window.Snipcart) {
       window.Snipcart.api.theme.cart.open();
     }
   };
-  
+  const isCartEmpty = (): boolean => {
+    return count.value>0
+  }
   useEffect(() => {
     document.addEventListener("snipcart.ready", () => {
       Snipcart.store.subscribe(() => {
-        count.value = Snipcart.store.getState().cart.items.count;
+        // count.value = Snipcart.store.getState().cart.items.count;
+        setCount({
+          value: Snipcart.store.getState().cart.items.count,
+        })
         shoppingState.value = Snipcart.store.getState();
       });
     });
@@ -46,17 +58,19 @@ export function CartButton({ label = `default label of card button`, option = `p
   return (
     <>
       {/* </><transition name="fade"> */}
-        <button
+          <button
           aria-label="label"
-          class="cart-btn grid h-full place-items-center"
+          class={`${!isCartEmpty()?``:`disabled`} cart-btn grid h-full place-items-center`}
           onClick={openCart}
           ref={btn}
-          data-count={count}
-          v-if={`${count} > 0`}
+          data-count={count.value}
         >
           <slot />
+          CartButton
         </button>
-      {/* </transition> */}
+        
+      {///* </transition> */
+      }
 
       <div class="hidden">
         { `${JSON.stringify(shoppingState, null, 4)}` }
