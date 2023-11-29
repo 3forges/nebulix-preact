@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "preact/compat"
+import React, { useEffect, useRef, useState } from "preact/compat"
 import "./CartButton.module.css"
 export interface Shopping {
   value?: any;
@@ -13,10 +13,11 @@ export interface CartButtonProps {
   label?: String;
   value?: string;
   option?: string;
+  children: any;
 }
 
 
-export function CartButton({ label = `default label of card button`, option = `pesto`, value = `pesto`}: CartButtonProps) {
+export function CartButton({ children, label = `default label of card button`, option = `pesto`, value = `pesto`}: CartButtonProps) {
  
   const btn = useRef(null)
   const [count, setCount] = useState<CartCount>({
@@ -67,6 +68,10 @@ export function CartButton({ label = `default label of card button`, option = `p
         >
           <slot />
           CartButton
+          {React.Children.map(children, child => {
+            // return <Wrapper>{child}</Wrapper>
+            return <>{child}</>
+          })}
         </button>
         
       {///* </transition> */
