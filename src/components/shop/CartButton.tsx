@@ -1,22 +1,33 @@
-import { useEffect, useRef } from "preact/compat"
-import "CarButton.module.css"
-const props = defineProps({
-  label: String,
-});
+import { useEffect, useRef, useState } from "preact/compat"
+import "./CartButton.module.css"
+export interface Shopping {
+  value?: any;
+}
 
-export function CarButton(props) {
+export interface CartButtonProps {
+  label?: String;
+  value?: string;
+  option?: string;
+}
+
+
+export function CartButton({ label = `default label of card button`, option = `pesto`, value = `pesto`}: CartButtonProps) {
  
   const btn = useRef(null)
   const count = 0
-  const shoppingState = null
+  const [shoppingState, setShoppingState] = useState<Shopping>({
+    value: {}
+  })
   /*
   const setValue = () => {
     if (!btn) return;
     btn.setAttribute(props.option, message.value);
   };
   */
-  
+  //if (!!window.Snipcart)
+  //const SnipcartService = window.Snipcart?
   const openCart = () => {
+    console.log(``);
     if (window.Snipcart) {
       window.Snipcart.api.theme.cart.open();
     }
@@ -29,7 +40,7 @@ export function CarButton(props) {
         shoppingState.value = Snipcart.store.getState();
       });
     });
-    btn.current.optionsetAttribute(props.option, message.value);
+    btn.current.setAttribute(`${option}`, `${value}`);
   }, []);
 
   return (
@@ -48,7 +59,7 @@ export function CarButton(props) {
       {/* </transition> */}
 
       <div class="hidden">
-        { shoppingState }
+        { `${JSON.stringify(shoppingState, null, 4)}` }
       </div>
     </>
   )
