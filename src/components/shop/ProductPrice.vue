@@ -1,4 +1,4 @@
-<template>
+<template>PRODUCT PRICE HERE
   <div class="grid gap-0 text-right leading-none">
     <span :class="offer > 0 ? 'muted text-xs text-danger line-through' : ''">
       {{ Price }}
@@ -18,7 +18,7 @@ const $productExtraPrice = useStore(productExtraPrice);
 
 const props = defineProps({
   price: Number,
-  offer: {
+  offerPrice: {
     type: Number,
     required: false,
     default: 0,

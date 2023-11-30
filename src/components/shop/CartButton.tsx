@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "preact/compat"
-import './CartButton.module.css'
+import style from './CartButton.module.css'
 export interface Shopping {
   value?: any;
 }
@@ -50,33 +50,30 @@ export function CartButton({ children, label = `default label of card button`, o
         setCount({
           value: Snipcart.store.getState().cart.items.count,
         })
-        shoppingState.value = Snipcart.store.getState();
+        setShoppingState(Snipcart.store.getState());
       });
     });
-    btn.current.setAttribute(`${option}`, `${value}`);
+    btn.current.setAttribute(`${option}`, `${value}`); 
   }, []);
 
   const afterCartCounterTw = `` // `absolute -right-2 top-0 grid h-4 w-4 place-items-center rounded-full border-2 border-current bg-opacity-70 font-bold md:top-1` 
   return (
     <>
-      {/* </><transition name="fade"> */}
+      {/* <transition name="fade"> */}
           <button
           aria-label="label"
-          class={`${!isCartEmpty()?``:`disabled`} ${afterCartCounterTw} cart-btn grid h-full place-items-center`}
+          class={`${!isCartEmpty()?``:`disabled`} ${afterCartCounterTw} ${style.cartBtn} grid h-full place-items-center`}
           onClick={openCart}
           ref={btn}
           data-count={count.value}
         >
-          <slot />
-          CartButton
           {React.Children.map(children, child => {
-            // return <Wrapper>{child}</Wrapper>
             return <>{child}</>
           })}
+
         </button>
         
-      {///* </transition> */
-      }
+      {/* </transition> */}
 
       <div class="hidden">
         { `${JSON.stringify(shoppingState, null, 4)}` }
