@@ -33,19 +33,19 @@ Youtube.vue
   src/components/Header.astro
 * Newsletter.vue
   src/components/Footer.astro
-CartButton.vue
+* CartButton.vue
   src/components/Header.astro
   src/pages/images/[slug].astro
-ProductPrice.vue
+* ProductPrice.vue
   src/components/shop/AddToCart.astro
-ProductVariationImageWrap.vue
+* ProductVariationImageWrap.vue
   src/layouts/ProductLayoutSplit.astro
 SnipCartInit.vue
   src/layouts/BaseLayout.astro
   src/pages/images/[slug].astro
-VariationButton.vue
+* VariationButton.vue
   src/components/shop/ProductVariations.astro
-VariationInput.vue
+* VariationInput.vue
   src/components/shop/ProductVariations.astro 
 
 

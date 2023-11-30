@@ -1,4 +1,5 @@
 <template>
+  Valid INPUT
   <input
     type="text"
     placeholder="..."

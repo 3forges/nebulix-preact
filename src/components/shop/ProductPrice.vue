@@ -18,7 +18,7 @@ const $productExtraPrice = useStore(productExtraPrice);
 
 const props = defineProps({
   price: Number,
-  offerPrice: {
+  offer: {
     type: Number,
     required: false,
     default: 0,

@@ -1,4 +1,5 @@
 <template>
+  PRODUCTIMAGE
   <div
     class="product-image col-start-1 row-start-1 h-full w-full"
     :class="className"

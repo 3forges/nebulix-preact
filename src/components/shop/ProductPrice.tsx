@@ -2,17 +2,12 @@ import { useEffect } from 'preact/compat'
 import { productExtraPrice, productVariations } from "@src/store";
 import { formatPrice } from "@util/toLocale";
 
-const offerTypes = {
-  type: Number,
-  required: false,
-  default: 0,
+interface PropsType {
+  price: number,
+  offer: number,
 }
-const propsTypes = {
-  price: Number,
-  offer: offerTypes,
-};
 
-function ProductPrice(props: propsTypes) {
+function ProductPrice(props: PropsType ) {
   console.log("ProductPrice.tsx props: ", props)
 
   // const { Price, offer } = props
@@ -34,7 +29,7 @@ function ProductPrice(props: propsTypes) {
     <>PRODUCT PRICE HERE
       <div class="grid gap-0 text-right leading-none">
         <span class={ props.offer > 0 ? 'muted text-xs text-danger line-through' : ''}>
-          { props.Price }
+          { props.price }
         </span>
         <span v-if={ props.offer > 0}>{ OfferPrice }</span>
       </div>
