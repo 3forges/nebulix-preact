@@ -3,20 +3,14 @@
   afficher les images passé en argument URL (en tout cas en l'etat)
   (image_clickée?index=0&gallery=/images/cosmic_moscow_mule,/images/cosmic-aperol-spritz,/images/cosmic_gin_tonic,/images/cosmic-dark-and-stormy,/images/long-island-iced-tea,/images/cosmic_coctails_1)
 */
-import "ImageNav.module.css"
+import "./ImageNav.module.css"
 
-const props = defineProps({
-  gallery: {
-    type: Array,
-    required: false,
-  },
-  translations: {
-    type: Object,
-    required: false,
-  },
-});
+interface propsType {
+  gallery: string[],
+  translations: Object,
+};
 
-export function ImageNav(props) {
+export function ImageNav(props: any) {
   const queryString = window.location.search
   const urlParams = new URLSearchParams(queryString) || ''
   const historyLength = { value: 0 }

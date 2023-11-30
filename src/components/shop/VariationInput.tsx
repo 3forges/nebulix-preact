@@ -1,6 +1,6 @@
 import { useEffect } from 'preact/compat'
 
-function VariationInput(props: any) {
+export function VariationInput(props: any) {
   
   let btn
   const message = { value: null }

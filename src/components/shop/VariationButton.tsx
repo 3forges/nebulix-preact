@@ -2,7 +2,7 @@ import { useEffect } from "preact/compat"
 import { useStore } from "@nanostores/vue";
 import { productExtraPrice, productVariations } from "@src/store";
 
-export function VariantionButton(props: any) {
+export function VariationButton(props: any) {
   let btn
 
   const $productVariations = JSON.parse(JSON.stringify(useStore(productVariations)));

@@ -25,7 +25,6 @@ export function ProductVariationImageWrap(props: Props) {
 
   return(
     <>
-      PRODUCTIMAGE
       <div
         class={`${className} product-image col-start-1 row-start-1 h-full w-full`}
         v-show={active}

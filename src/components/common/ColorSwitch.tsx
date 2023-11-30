@@ -1,10 +1,3 @@
-/**
- * vue to preact migration
- * 
- * tsconfig.json :  "verbatimModuleSyntax": true, => "verbatimModuleSyntax": false,
- */
-
-
 export function ColorSwitch() {
    
 const toggleDark = () => {

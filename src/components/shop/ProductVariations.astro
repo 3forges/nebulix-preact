@@ -1,8 +1,8 @@
 ---
 import { formatPrice } from "@util/toLocale";
 import { Picture } from "astro-imagetools/components";
-import VariationButton from "./VariationButton.vue";
-import VariationInput from "./VariationInput.vue";
+import {VariationButton} from "./VariationButton";
+import {VariationInput} from "./VariationInput";
 
 const { thumbnail, variations } = Astro.props;
 const optionsArr = variations.map((option, index) => {

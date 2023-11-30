@@ -268,7 +268,7 @@ const submit = () => {
           form.name = "";
           form.phone = "";
           form.message = "";
-          input.value = "";
+          //input.value = "";
           hide();
         } else {
           toast.error(t("contact_error"));

@@ -1,5 +1,5 @@
 import { useState } from 'preact/compat'
-import { Loading } from '@components/common/Loading'
+import Loading from '@components/common/Loading.vue'
 import { t } from "@util/translate"
 import "vue3-toastify/dist/index.css"
 

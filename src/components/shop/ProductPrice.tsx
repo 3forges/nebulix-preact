@@ -7,7 +7,7 @@ interface PropsType {
   offer: number,
 }
 
-function ProductPrice(props: PropsType ) {
+export function ProductPrice(props: PropsType ) {
   console.log("ProductPrice.tsx props: ", props)
 
   // const { Price, offer } = props

@@ -11,11 +11,8 @@ export const Loading = ({loading = false}: LoadingProps) => {
     
     return (
         <>
-              {loadingState && (
-                  
-<div
-              class="loading absolute inset-0 grid place-items-center text-primary backdrop-opacity-50"
-              v-if="loading"
+            <div
+              class={`${loadingState ? 'visible' : 'invisible'} loading absolute inset-0 grid place-items-center text-primary backdrop-opacity-50`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -56,11 +53,7 @@ export const Loading = ({loading = false}: LoadingProps) => {
                   />
                 </circle>
               </svg>
-            </div>
-
-                  )
-                }
-          
+            </div>         
         </>
     )
 }

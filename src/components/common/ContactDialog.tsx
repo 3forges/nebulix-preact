@@ -1,31 +1,36 @@
 import { useEffect } from 'preact/hooks'
 import { useState, useRef } from 'preact/compat'
 // import { Transition } from 'vue';
-import { ref, watch, onMounted, reactive, computed } from "vue";
+// import { ref, watch, onMounted, reactive, computed } from "vue";
 import { t } from "@util/translate";
-import { useStore } from "@nanostores/vue";
+// import { useStore } from "@nanostores/vue";
 import { showContact } from "@src/store";
-import { useAsyncValidator } from "@vueuse/integrations/useAsyncValidator";
-import { useTextareaAutosize } from "@vueuse/core";
-// import Loading from "@components/common/Loading.vue";
-import {Loading} from "@components/common/Loading";
+//import { useAsyncValidator } from "@vueuse/integrations/useAsyncValidator";
+//import { useTextareaAutosize } from "@vueuse/core";
+import Loading from "@components/common/Loading.vue";
+//import {Loading} from "@components/common/Loading";
 import "vue3-toastify/dist/index.css";
-import { toast } from "vue3-toastify";
+//import { toast } from "vue3-toastify";
 
 import {
   disableBodyScroll,
   enableBodyScroll,
   clearAllBodyScrollLocks,
 } from "body-scroll-lock";
-import Popper from "vue3-popper";
+// import Popper from "vue3-popper";
 
 
 
+export interface formTypes {
+  email: string,
+  name: string,
+  message: string,
+  phone: string,
+}
 
 
-const form = reactive({ email: "", name: "", message: "", phone: "" });
-const { textarea, input } = useTextareaAutosize();
-
+// const { textarea, input } = useTextareaAutosize();
+/*
 const rules = {
   email: [
     {
@@ -47,13 +52,11 @@ const rules = {
     },
   ],
 };
-
+*/
 
 // const topic = ref(null);
 // const showPopper = ref(false);
-// const loading = ref(false);
-// const topicChannel = ref(null);
-// const topicEmail = ref(null);
+
 
 export interface ContactInfos {
   title: string;
@@ -64,7 +67,6 @@ export interface ContactInfos {
   email: string;
   phone: string;
   message: string;
-
 }
 
 export interface Topic {
@@ -76,9 +78,15 @@ export interface ContactDialogProps {
 }
 export const ContactDialog = (props: ContactDialogProps) => {
     // const $show = useStore(showContact);
-    const [showContact, setShowContact ] = useState<boolean>(true);
+    const [form, setForm] = useState<formTypes>({ email: "", name: "", message: "", phone: "" });
+    const input = useRef(null)
+    const loading = { value: false }
+    const topicChannel = { value: null }
+    const topicEmail = { value: null }
+    const [showContact, setShowContact ] = useState<boolean>(false);
+    const [showTopics, setShowTopics ] = useState<boolean>(false);
     const [isLoading, setIsLoading ] = useState<boolean>(false);
-    const [topic, setTopic ] = useState<Topic>()
+    const [topic, setTopic ] = useState<Topic>({ name: 'default', label: 'default'})
     const [contact, setContact ] = useState<ContactInfos>({
       title: `Contact`,
       email: `your@email.com`,
@@ -88,7 +96,8 @@ export const ContactDialog = (props: ContactDialogProps) => {
       provider: `mailgun`,
       topics: [
         {label: `for fun`, name: `fun`},
-        {label:  `for saying hi`, name:  `sayinghi`}]
+        {label:  `for saying hi`, name:  `sayinghi`}],
+      phone: '012345678'
     })
     
     const hide = () => {
@@ -130,36 +139,37 @@ export const ContactDialog = (props: ContactDialogProps) => {
           .then((r) => r.json())
           .then((data) => {
             if (data.status === "ok") {
-              toast.success(t("contact_thanks"));
+              //toast.success(t("contact_thanks"));
               form.email = "";
               form.name = "";
               form.phone = "";
               form.message = "";
-              input.value = "";
+              // input.value = "";
               hide();
             } else {
-              toast.error(t("contact_error"));
+              //toast.error(t("contact_error"));
             }
           })
           .catch((e) => {
             console.log("error", e);
-            toast.error(t("contact_error"));
+            //toast.error(t("contact_error"));
           })
           .finally(() => {
-            loading.value = false;
+            setIsLoading(false);
           });
       }
     };
+    /*
     useEffect(() => {
         
     })
+    */
     return (
         <>
           {//<Transition name="fade">
           }
     <div
-      v-show="$show"
-      class="bg-dark-blur z-1000 dialog pointer-events-auto fixed inset-0 grid w-full cursor-pointer place-items-center"
+      class={`${showContact ? 'visible' : 'invisible'} bg-dark-blur z-1000 dialog pointer-events-auto fixed inset-0 grid w-full cursor-pointer place-items-center`}
       onClick={hide}
     >
       <div /*onClick.stop*/ class="container-md relative">
@@ -178,9 +188,6 @@ export const ContactDialog = (props: ContactDialogProps) => {
 
                 <slot name="content" />
               </div>
-
-              
-
               <div
                 class="input-group z-20 w-full"
                 v-if="contact.topics.length > 1"
@@ -188,7 +195,7 @@ export const ContactDialog = (props: ContactDialogProps) => {
                 {// Here there was the Popper 
   
                 }
-              <button
+                <button
                     type="button"
                     onClick={toggleTopics /* showPopper = !showPopper*/}
                     class="select surface-overlay w-full text-left"
@@ -198,18 +205,21 @@ export const ContactDialog = (props: ContactDialogProps) => {
 
                   {showTopics && (
                     <ul>
-                      <li
-                        v-for="(item, index) in contact.topics"
-                        key="index"
-                        class={`${topic == item.label ? 'bg-dark bg-opacity-10' : ''}`}
-                      >
-                        <button
-                          type="button"
-                          class="w-full p-2 text-left hover:bg-dark hover:bg-opacity-10"
-                          onClick={selectTopic}>
-                          {{ item.label }}
-                        </button>
-                      </li>
+                      {contact.topics.map((item, index) => {
+                        return (
+                          <li
+                            key={index}
+                            class={`${ topic.label == item.label ? 'bg-dark bg-opacity-10' : ''}`}
+                          >
+                            <button
+                              type="button"
+                              class="w-full p-2 text-left hover:bg-dark hover:bg-opacity-10"
+                              onClick={() =>{ return false}}>
+                              { item.label }
+                            </button>
+                          </li>
+                          )
+                      })}
                     </ul>
                     ) || (
                     <span></span>
@@ -217,6 +227,7 @@ export const ContactDialog = (props: ContactDialogProps) => {
                   }
                   <div class={"tooltip-arrow"} data-popper-arrow></div>
               </div>
+              <div>
                 <label
                   class="peer-placeholder-shown:left-4 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-9 peer-focus:scale-75 peer-focus:text-primary"
                   >{ t(topic?topic.name:`default topic`) } *
@@ -224,10 +235,6 @@ export const ContactDialog = (props: ContactDialogProps) => {
                 
               </div>
 
-
-
-
-              
               <div class="input-group">
                 <input
                   type="text"
@@ -298,14 +305,14 @@ export const ContactDialog = (props: ContactDialogProps) => {
             </form>
           </div>
         </div>
-        <button
-          class="btn btn-icon surface-dark btn-absolute -right-3 -top-3 z-10"
-          onClick={hide}
-        >
-          <slot />
-        </button>
+          <button
+            class="btn btn-icon surface-dark btn-absolute -right-3 -top-3 z-10"
+            onClick={hide}
+          >
+            <slot />
+          </button>
+        </div>
       </div>
-    </div>
   
           {//</Transition>
           }
@@ -318,14 +325,12 @@ export const ContactDialog = (props: ContactDialogProps) => {
 
 
 
-
+{/*
 /**
  * One of the many features available in Vue is the watcher function, which allows us to monitor an application state and trigger actions based on these changes.
  */
 
 /*
-<script setup>
-
 const setTopic = (data) => {
   console.log(data);
   topic.value = data.label;
@@ -415,4 +420,4 @@ watch(
   }
 }
 </style>
-*/
+*/}
