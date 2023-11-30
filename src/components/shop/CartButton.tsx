@@ -46,10 +46,12 @@ export function CartButton({ children, label = `default label of card button`, o
   useEffect(() => {
     document.addEventListener("snipcart.ready", () => {
       Snipcart.store.subscribe(() => {
+        
         // count.value = Snipcart.store.getState().cart.items.count;
         setCount({
           value: Snipcart.store.getState().cart.items.count,
         })
+        console.log(" - Snipcart.store.subscribe - count: ", count)
         setShoppingState(Snipcart.store.getState());
       });
     });

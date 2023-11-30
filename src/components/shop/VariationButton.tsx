@@ -3,13 +3,14 @@ import { useStore } from "@nanostores/vue";
 import { productExtraPrice, productVariations } from "@src/store";
 
 export function VariationButton(props: any) {
-  let btn
+  let btn //= document.querySelector("#add-to-card")
 
-  const $productVariations = JSON.parse(JSON.stringify(useStore(productVariations)));
+  const ProductVariations = JSON.parse(JSON.stringify(useStore(productVariations)));
+  /*
   const active = () => {
-    return $productVariations.value.some((product) => product.id === props.id);
+    return ProductVariations.value.some((product) => product.id === props.id);
   };
-
+*/
   /*
   watch($productVariations, (value) => {
     const total = value.reduce((accumulator, currentObject) => {
@@ -21,44 +22,44 @@ export function VariationButton(props: any) {
   */
 
   useEffect(() => {
-    btn.value = document.querySelector("#add-to-card")
+    btn = document.querySelector("#add-to-card")
   }, [])
 
   useEffect(() => {
-    const total = $productVariations.reduce((accumulator, currentObject) => {
+    const total = ProductVariations.reduce((accumulator, currentObject) => {
       return accumulator + currentObject.price;
     }, 0);
   
     productExtraPrice.set(total);
-  }, [$productVariations])
+  }, [ProductVariations])
 
   function addOrRemoveProduct(object) {
-    let arr = JSON.parse(JSON.stringify($productVariations.value));
+    let arr = JSON.parse(JSON.stringify(ProductVariations.value));
     const existingGroupIndex = arr.findIndex((obj) => obj.group === props.group);
     const existingIndex = arr.findIndex((obj) => obj.id === props.id);
   
     if (existingGroupIndex !== -1 && existingIndex === -1) {
       arr[existingGroupIndex] = object;
-      btn.value.setAttribute(props.option, object.value);
+      btn.setAttribute(props.option, object.value);
       productVariations.set(arr);
       return;
     }
   
     if (existingIndex !== -1) {
       arr.splice(existingIndex, 1);
-      btn.value.removeAttribute(props.option);
+      btn.removeAttribute(props.option);
       productVariations.set(arr);
       return;
     }
   
     arr.push(object);
-    btn.value.setAttribute(props.option, object.value);
+    btn.setAttribute(props.option, object.value);
     productVariations.set(arr);
     return;
   }
 
   const setValue = () => {
-    if (!btn.value) return;
+    if (!btn) return;
   
     addOrRemoveProduct({
       hasImage: props.hasImage,

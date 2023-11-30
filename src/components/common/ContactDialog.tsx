@@ -9,7 +9,7 @@ import { showContact } from "@src/store";
 //import { useTextareaAutosize } from "@vueuse/core";
 import Loading from "@components/common/Loading.vue";
 //import {Loading} from "@components/common/Loading";
-import "vue3-toastify/dist/index.css";
+// import "vue3-toastify/dist/index.css";
 //import { toast } from "vue3-toastify";
 
 import {
