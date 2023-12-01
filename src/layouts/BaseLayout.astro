@@ -67,7 +67,8 @@ const contact = await getEntry("config", "contact");
     </Footer>
     <Init client:idle />
 
-    <ContactDialog client:only="preact" contact={contact.data.form}>
+    <!-- client:only="preact" -->
+    <ContactDialog client:idle contact={contact.data.form}>
       {
         contact?.data?.form?.intro && (
           <div
