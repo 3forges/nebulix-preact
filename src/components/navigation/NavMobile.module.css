@@ -1,0 +1,43 @@
+.nav-mobile {
+  @apply overflow-x-hidden overflow-y-scroll;
+  z-index: 999998;
+  scrollbar-width: none;
+  padding-bottom: calc(2em + env(safe-area-inset-bottom));
+  &-btn {
+    z-index: 999999;
+  }
+}
+
+.nested-enter-active,
+.nested-leave-active {
+  transition: all 0.7s ease-in-out;
+}
+
+.nested-leave-active {
+  transition-delay: 0.25s;
+}
+.inner {
+  transition-delay: 0.25s;
+}
+
+.nested-enter-from,
+.nested-leave-to {
+  transform: translateX(100%);
+  transform-origin: right center;
+  opacity: 1;
+}
+
+.nested-enter-active .inner,
+.nested-leave-active .inner {
+  transition: all 0.3s ease-in-out;
+}
+
+.nested-enter-active .inner {
+  transition-delay: var(--animation-delay, 0.25s);
+}
+
+.nested-enter-from .inner,
+.nested-leave-to .inner {
+  transform: translateX(200px);
+  opacity: 0.001;
+}
