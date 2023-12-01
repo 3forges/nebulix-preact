@@ -1,6 +1,6 @@
 import { useEffect } from 'preact/compat'
 import { showContact } from "@src/store"
-
+import {contact_dialog_html_elt_id} from "./config"
 export function Init() {
   const width = window.innerWidth
   const shown = false;
@@ -68,7 +68,7 @@ export function Init() {
           },
           {
             fill: "both",
-            timeline: new ViewTimeline({ subject: el }),
+            timeline: new ViewTimeline({ subject: el }), // ViewTimeline is from the polyfill
             rangeStart: { rangeName: "exit", offset: CSS.percent(5) },
             rangeEnd: { rangeName: "exit", offset: CSS.percent(100) },
           },
@@ -78,10 +78,22 @@ export function Init() {
   
     /* CONTACT FORM */
     const contactButtons = document.querySelectorAll("[href='#contact']");
+    console.log(` [Init.tsx] -`)
+    console.log(` [Init.tsx] -`)
+    console.log(` [Init.tsx] - contactButtons : `, contactButtons)
     contactButtons.forEach((el) => {
       el.addEventListener("click", (e) => {
+        console.log(` [Init.tsx] - click CONTACT EVENT`)
         e.preventDefault();
-        showContact.set(true);
+        const contactdialog = document.getElementById(`${contact_dialog_html_elt_id}`)
+        contactdialog?.classList.add(`visible`)
+        contactdialog?.classList.remove(`invisible`)
+        contactdialog?.classList.toggle(`hidden`)
+        contactdialog?.classList.toggle(`overflow-x-hidden`)
+        
+        // id={`${contact_dialog_html_elt_id}Label`}
+        
+        /// showContact.set(true); // uses the store we want to get rid of
       });
     });
   }, [])
