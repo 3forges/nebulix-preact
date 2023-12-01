@@ -1,8 +1,0 @@
-.cartBtn {
-  @apply relative;
-  &:after {
-    content: attr(data-count);
-    font-size: 0.58rem;
-    @apply absolute -right-2 top-3 grid h-4 w-4 place-items-center rounded-full border-2 border-current bg-opacity-70 font-bold md:top-1;
-  }
-}
