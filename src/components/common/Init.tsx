@@ -77,7 +77,7 @@ export function Init() {
     }
   
     /* CONTACT FORM */
-    const contactButtons = document.querySelectorAll("[href='#contact']");
+    const contactButtons = document.querySelectorAll(`[href='#${contact_dialog_html_elt_id}']`);
     console.log(` [Init.tsx] -`)
     console.log(` [Init.tsx] -`)
     console.log(` [Init.tsx] - contactButtons : `, contactButtons)
@@ -90,6 +90,7 @@ export function Init() {
         contactdialog?.classList.remove(`invisible`)
         contactdialog?.classList.toggle(`hidden`)
         contactdialog?.classList.toggle(`overflow-x-hidden`)
+        // contactdialog?.style.display = 'block';
         
         // id={`${contact_dialog_html_elt_id}Label`}
         
