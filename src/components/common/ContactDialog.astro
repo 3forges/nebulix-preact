@@ -14,6 +14,12 @@ const contactImage = "/src/assets/cosmic_contact_settings.jpeg";
 import ContactDialogForm from "./ContactDialogForm.astro"
 // import { getGridImageSizes } from "@util/helpers";
 // const sizes = getGridImageSizes(`sm`);
+
+const imageName = contactImage.split("/").pop().split(".")[0];
+
+
+
+const animation = `image_${imageName}`;
 ---
 
 <script>
@@ -119,12 +125,26 @@ import ContactDialogForm from "./ContactDialogForm.astro"
   Toggle modal
 </button>
 
+<style>
+
+  /* For Webkit-based browsers (Chrome, Safari and Opera) */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+/* For IE, Edge and Firefox */
+.scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+</style>
+
 <!-- Main modal -->
 <div
   id={`${contact_dialog_html_elt_id}`}
   tabindex="-1"
   aria-hidden="true"
-  class="transform-all fixed top-0 z-50 m-auto h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden md:inset-0"
+  class="scrollbar-hide fixed top-0 z-50 m-auto h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden md:inset-0"
 >
   <div class="relative mx-auto mt-[8vh] max-h-full w-full max-w-2xl p-4">
 
@@ -175,11 +195,9 @@ import ContactDialogForm from "./ContactDialogForm.astro"
         layout="fullWidth"
         aspect={`0.465`}
         position="attention"
-        transition:animate={()=>{
-          console.log(` Voilà le [transition:animate] => `)
-        }}
         transition:persist
-        transition:name="cart"
+        transition:name={`${animation}`}
+        data-animation={animation}
         sizes={(breakpoints) => {
           const maxWidth = breakpoints[breakpoints.length - 1];
           return `(min-width: ${maxWidth}px) ${maxWidth}px, 100vw`;
