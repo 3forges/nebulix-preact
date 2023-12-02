@@ -9,7 +9,8 @@ import {ImageNav} from "@components/navigation/ImageNav"
 import {PanZoom} from "@components/media/PanZoom"
 import {CartButton} from "@components/shop/CartButton"
 // last .vue
-import SnipCart from "@components/shop/SnipCartInit.vue";
+// import SnipCart from "@components/shop/SnipCartInit.vue";
+import {SnipCartInit} from "@components/shop/SnipCartInit";
 
 const snipcartKey = import.meta.env.SNIPCART_KEY;
 
@@ -62,7 +63,7 @@ const title = toHeaderCase(slug);
           >
             <Icon name="shopping-cart" class="h-6 w-6" slot="cart" />
           </CartButton>
-          <SnipCart
+          <SnipCartInit
             transition:persist
             transition:name="snipcart-base"
             snipcartKey={snipcartKey}

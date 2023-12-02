@@ -5,9 +5,12 @@ import { Picture } from "astro-imagetools/components";
 import BaseHead from "@components/BaseHead.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
-import Init from "@components/common/Init.vue";
+// import Init from "@components/common/Init.vue";
+import { Init } from "@components/common/Init";
 import {SnipCartInit} from "@components/shop/SnipCartInit";
-import ContactDialog from "@components/common/ContactDialog.vue";
+//import ContactDialog from "@components/common/ContactDialog.vue";
+//import {ContactDialog} from "@components/common/ContactDialog";
+import ContactDialog from "@components/common/ContactDialog.astro";
 import { Icon } from "astro-icon";
 import { t } from "@util/translate";
 import "@fontsource-variable/inter-tight";
@@ -65,9 +68,10 @@ const contact = await getEntry("config", "contact");
         </div>
       </div>
     </Footer>
-    <Init client:idle />
+    <Init client:only="preact" />
 
-    <ContactDialog client:only="preact" contact={contact.data.form}>
+    <!-- client:only="preact" -->
+    <ContactDialog contact={contact.data.form}>
       {
         contact?.data?.form?.intro && (
           <div

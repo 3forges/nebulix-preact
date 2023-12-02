@@ -1,0 +1,48 @@
+
+.z-1000 {
+  z-index: 1000;
+}
+.dialog-grid {
+  @apply grid grid-cols-1;
+  @screen md {
+    grid-template-columns: 4fr 5fr;
+  }
+}
+
+.bg-dark-blur {
+  @apply bg-dark bg-opacity-50 backdrop-blur-sm;
+}
+
+.dialog {
+  --popper-theme-padding: 0;
+  &__inner {
+    max-height: calc(100vh - 2rem);
+    overflow-x: hidden;
+    overflow-y: auto;
+    @screen md {
+      height: min(100vh - 2rem, 40rem);
+    }
+  }
+
+  &__content {
+    @screen md {
+      max-height: calc(100vh - 2rem);
+      height: min(100vh - 2rem, 40rem);
+      height: min(100vh - 2rem, 40rem);
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+  }
+}
+
+.input-group {
+  @apply relative isolate;
+  input,
+  textarea,
+  .select {
+    @apply block w-full rounded-2xl px-3 py-2.5  focus:outline-primary;
+  }
+  label {
+    @apply absolute left-0 top-3 z-10 origin-[0] -translate-y-9  scale-75 transform text-sm  duration-300;
+  }
+}

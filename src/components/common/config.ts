@@ -1,0 +1,1 @@
+export const contact_dialog_html_elt_id = `pesto_contact_dialog`

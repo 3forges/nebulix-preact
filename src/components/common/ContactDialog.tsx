@@ -9,8 +9,9 @@ import { showContact } from "@src/store";
 //import { useTextareaAutosize } from "@vueuse/core";
 import {Loading} from "@components/common/Loading";
 //import {Loading} from "@components/common/Loading";
-import "vue3-toastify/dist/index.css";
+import toastify from "vue3-toastify/dist/index.css";
 //import { toast } from "vue3-toastify";
+import styles from "./ContactDialog.module.css"
 
 import {
   disableBodyScroll,
@@ -19,7 +20,7 @@ import {
 } from "body-scroll-lock";
 // import Popper from "vue3-popper";
 
-
+import {contact_dialog_html_elt_id} from "./config"
 
 export interface formTypes {
   email: string,
@@ -76,6 +77,8 @@ export interface Topic {
 export interface ContactDialogProps {
   contact: ContactInfos
 }
+
+
 export const ContactDialog = (props: any) => {
     // const $show = useStore(showContact);
     const [form, setForm] = useState<formTypes>({ email: "", name: "", message: "", phone: "" });
@@ -166,9 +169,11 @@ export const ContactDialog = (props: any) => {
     return (
         <>
           {//<Transition name="fade">
+          // ${showContact ? 'visible' : 'invisible'}
           }
-    <div
-      class={`${showContact ? 'visible' : 'invisible'} bg-dark-blur z-1000 dialog pointer-events-auto fixed inset-0 grid w-full cursor-pointer place-items-center`}
+    <div id={`${contact_dialog_html_elt_id}`}
+      style={toastify}
+      class={`invisible ${styles.dialog} bg-dark-blur z-1000 dialog pointer-events-auto fixed inset-0 grid w-full cursor-pointer place-items-center`}
       onClick={hide}
     >
       <div /*onClick.stop*/ class="container-md relative">
@@ -197,7 +202,7 @@ export const ContactDialog = (props: any) => {
                     onClick={toggleTopics}
                     class="select surface-overlay w-full text-left"
                   >
-                    { !!topic ? topic : "Select" }
+                    { !!topic ? JSON.stringify(topic, null, 4) : "Select" }
                   </button>
 
                   {showTopics && (
