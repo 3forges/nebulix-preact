@@ -92,8 +92,6 @@ export function Init() {
 
     contactButtons.forEach((el) => {
       el.addEventListener("click", (e) => {
-        console.log(` [Init.tsx] - click CONTACT EVENT`)
-        e.preventDefault();
         const contactdialog = document.getElementById(`${contact_dialog_html_elt_id}`)
         contactdialog?.classList.toggle("invisible")
       
