@@ -1,139 +1,13 @@
 ---
 // import { Loading } from "./Loading";
 import { contact_dialog_html_elt_id } from "./config";
-
-// import { useState, useRef } from 'preact/compat'
-// const [isLoading, setIsLoading ] = useState<boolean>(false);
-// id={`${contact_dialog_html_elt_id}`}
-
-// let contact_dialog_html_elt_id = {contact_dialog_html_elt_id}
-
 import { Picture } from "astro-imagetools/components";
-// import contactImage from "@assets/cosmic_contact_settings.jpeg"
-const contactImage = "/src/assets/cosmic_contact_settings.jpeg";
 import ContactDialogForm from "./ContactDialogForm.astro"
-// import { getGridImageSizes } from "@util/helpers";
-// const sizes = getGridImageSizes(`sm`);
 
-const imageName = contactImage.split("/").pop().split(".")[0];
-
-
-
+const contactImage = "/src/assets/cosmic_contact_settings.jpeg"
+const imageName = contactImage.split("/").pop().split(".")[0]
 const animation = `image_${imageName}`;
 ---
-
-<script>
-  let in_scrp_contact_dialog_html_elt_id = "pesto_contact_dialog";
-  function showContactdialog(contactdialog) {
-    contactdialog.classList.toggle(`visible`);
-    contactdialog.classList.toggle(`invisible`);
-    contactdialog.classList.toggle(`hidden`);
-    contactdialog.style.display = "block";
-    contactdialog.classList.remove(`opacity-0`);
-    contactdialog.classList.add(`opacity-100`);
-  }
-  function hideContactdialog(contactdialog) {
-    contactdialog.classList.toggle(`visible`);
-    contactdialog.classList.toggle(`invisible`);
-    contactdialog.classList.toggle(`hidden`);
-    contactdialog.style.display = "none";
-    contactdialog.classList.remove(`opacity-100`);
-    contactdialog.classList.add(`opacity-0`);
-    
-  }
-  function handleClick(e) {
-    console.log(" [ContactDialog.astro] - click CONTACT EVENT");
-    e.preventDefault();
-    // const contactdialog = document.getElementById(in_scrp_contact_dialog_html_elt_id);
-    const contactdialog = document.querySelector(
-      `#${in_scrp_contact_dialog_html_elt_id}`,
-    );
-    if (!!contactdialog) {
-      console.log(
-        " [ContactDialog.astro] - click CONTACT EVENT - contactdialog FULL OBJECT = ",
-        contactdialog,
-      );
-      console.log(
-        " [ContactDialog.astro] - click CONTACT EVENT - contactdialog.style.display = " +
-          JSON.stringify({ display: `[${contactdialog.style.display}]` }),
-      );
-      console.log(
-        " [ContactDialog.astro] - click CONTACT EVENT - IT SHOULD NOW APPEAR",
-      );
-      // contactdialog.classList.toggle("visible")
-      // contactdialog.classList.toggle("invisible")
-      // contactdialog.classList.toggle("hidden")
-      // contactdialog.style.display = "block"
-
-      if (!!contactdialog && contactdialog.style.display == "none") {
-        // contactdialog.style.display = "block";
-
-        showContactdialog(contactdialog)
-      } else if (!!contactdialog && contactdialog.style.display == "block") {
-        // contactdialog.style.display = "block";
-
-        hideContactdialog(contactdialog)
-      }
-    }
-  }
-
-  function handleClosePestoContactModalBtnClick(e) {
-    console.log(
-      " [ContactDialog.astro] - {handleClosePestoContactModalBtnClick} CONTACT EVENT",
-    );
-    e.preventDefault();
-    // const contactdialog = document.getElementById(in_scrp_contact_dialog_html_elt_id);
-    const contactdialog = document.querySelector(
-      `#${in_scrp_contact_dialog_html_elt_id}`,
-    );
-    if (!!contactdialog) {
-      console.log(
-        " [ContactDialog.astro] - {handleClosePestoContactModalBtnClick} CONTACT EVENT - contactdialog FULL OBJECT = ",
-        contactdialog,
-      );
-      console.log(
-        " [ContactDialog.astro] - {handleClosePestoContactModalBtnClick} CONTACT EVENT - contactdialog.style.display = " +
-          JSON.stringify({ display: `[${contactdialog.style.display}]` }),
-      );
-      console.log(
-        " [ContactDialog.astro] - {handleClosePestoContactModalBtnClick} CONTACT EVENT - IT SHOULD NOW APPEAR",
-      );
-      hideContactdialog(contactdialog)
-    }
-  }
-
-  const btnPestoModal = document.querySelector("#btnPestoModal");
-  if (!!btnPestoModal) {
-    btnPestoModal.addEventListener("click", () => {
-      console.log("Hello, btnPestoModal, on client");
-    });
-    btnPestoModal.addEventListener("click", handleClick);
-  }
-
-  const closePestoContactModalBtn = document.querySelector(
-    "#closePestoContactModalBtn",
-  );
-  if (!!closePestoContactModalBtn) {
-    closePestoContactModalBtn.addEventListener("click", () => {
-      console.log("Hello, closePestoContactModalBtn, on client");
-    });
-    closePestoContactModalBtn.addEventListener(
-      "click",
-      handleClosePestoContactModalBtnClick,
-    );
-  }
-</script>
-
-<!-- Modal toggle -->
-<button
-  id="btnPestoModal"
-  data-modal-target="default-modal"
-  data-modal-toggle="default-modal"
-  class="block rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-  type="button"
->
-  Toggle modal
-</button>
 
 <style>
 
@@ -157,18 +31,18 @@ const animation = `image_${imageName}`;
   id={`${contact_dialog_html_elt_id}`}
   tabindex="-1"
   aria-hidden="true"
-  class="bg-dark-blur transition-opacity duration-1000 ease-in-out opacity-100 scrollbar-hide fixed top-0 z-50 m-auto h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden md:inset-0"
+  class="invisible dark:bg-dark-blur transition-opacity duration-1000 ease-in-out opacity-100 scrollbar-hide fixed top-0 z-50 m-auto h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden md:inset-0"
 >
   <div class="relative mx-auto mt-[8vh] max-h-full w-full max-w-2xl p-4">
 
     <!-- Modal content -->
     <div class="flex flex-col justify-between p-1 leading-normal">
       <button
-      id="closePestoContactModalBtn"
-      type="button"
-      class="ms-auto mt-0 inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
-      data-modal-hide="default-modal"
-    >
+        id="closePestoContactModalBtn"
+        type="button"
+        class="ms-auto mt-0 inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+        data-modal-hide="default-modal"
+      >
       <svg
         class="h-3 w-3"
         aria-hidden="true"
@@ -188,15 +62,14 @@ const animation = `image_${imageName}`;
     </div>
     <a
       href="#"
-      class="flex flex-col items-center rounded-lg border border-gray-200 shadow hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 md:max-w-xl md:flex-row"
+      class="flex flex-col items-center rounded-lg border border-gray-200 shadow bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 md:max-w-xl md:flex-row"
     >
 
       <style>
         img.astro-imagetools-img, .astro-imagetools-picture {
           @apply rounded-xl rounded-t-xl blur;
         }
-      </style>
-          
+      </style>          
 
       <Picture
         className="object-cover transition-all border-4 w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
@@ -220,157 +93,5 @@ const animation = `image_${imageName}`;
         <ContactDialogForm />
       </div>
     </a>
-    
-
-
   </div>
-
-  <!--
-
-
-<div
-   class={`mb-32 mt-32 flex h-screen items-center justify-center bg-gray-200`}>
-  <div class="grid w-11/12 rounded-lg bg-white shadow-xl md:w-9/12 lg:w-1/2">
-    <div class="flex justify-center py-4">
-      <div
-        class="flex rounded-full border-2 border-purple-300 bg-purple-200 p-2 md:p-4"
-      >
-        <svg
-          class="h-8 w-8 text-white"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-          ><path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
-          ></path></svg
-        >
-      </div>
-    </div>
-
-    <div class="flex justify-center">
-      <div class="flex">
-        <h1 class="text-xl font-bold text-gray-600 md:text-2xl">
-          Tailwind Form
-        </h1>
-      </div>
-    </div>
-
-    <div class="mx-7 mt-5 grid grid-cols-1">
-      <label
-        class="text-xs font-semibold uppercase text-gray-500 text-light md:text-sm"
-        >Input 1</label
-      >
-      <input
-        class="mt-1 rounded-lg border-2 border-purple-300 px-3 py-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600"
-        type="text"
-        placeholder="Input 1"
-      />
-    </div>
-
-    <div class="mx-7 mt-5 grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-8">
-      <div class="grid grid-cols-1">
-        <label
-          class="text-xs font-semibold uppercase text-gray-500 text-light md:text-sm"
-          >Input 2</label
-        >
-        <input
-          class="mt-1 rounded-lg border-2 border-purple-300 px-3 py-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600"
-          type="text"
-          placeholder="Input 2"
-        />
-      </div>
-      <div class="grid grid-cols-1">
-        <label
-          class="text-xs font-semibold uppercase text-gray-500 text-light md:text-sm"
-          >Input 3</label
-        >
-        <input
-          class="mt-1 rounded-lg border-2 border-purple-300 px-3 py-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600"
-          type="text"
-          placeholder="Input 3"
-        />
-      </div>
-    </div>
-
-    <div class="mx-7 mt-5 grid grid-cols-1">
-      <label
-        class="text-xs font-semibold uppercase text-gray-500 text-light md:text-sm"
-        >Selection</label
-      >
-      <select
-        class="mt-1 rounded-lg border-2 border-purple-300 px-3 py-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600"
-      >
-        <option>Option 1</option>
-        <option>Option 2</option>
-        <option>Option 3</option>
-      </select>
-    </div>
-
-    <div class="mx-7 mt-5 grid grid-cols-1">
-      <label
-        class="text-xs font-semibold uppercase text-gray-500 text-light md:text-sm"
-        >Another Input</label
-      >
-      <input
-        class="mt-1 rounded-lg border-2 border-purple-300 px-3 py-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600"
-        type="text"
-        placeholder="Another Input"
-      />
-    </div>
-
-    <div class="mx-7 mt-5 grid grid-cols-1">
-      <label
-        class="mb-1 text-xs font-semibold uppercase text-gray-500 text-light md:text-sm"
-        >Upload Photo</label
-      >
-      <div class="flex w-full items-center justify-center">
-        <label
-          class="group flex h-32 w-full flex-col border-4 border-dashed hover:border-purple-300 hover:bg-gray-100"
-        >
-          <div class="flex flex-col items-center justify-center pt-7">
-            <svg
-              class="h-10 w-10 text-purple-400 group-hover:text-purple-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-              ><path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-              ></path></svg
-            >
-            <p
-              class="pt-1 text-sm lowercase tracking-wider text-gray-400 group-hover:text-purple-600"
-            >
-              Select a photo
-            </p>
-          </div>
-          <input type="file" class="hidden" />
-        </label>
-      </div>
-    </div>
-
-    <div class="flex items-center justify-center gap-4 pb-5 pt-5 md:gap-8">
-      <button
-        class="w-auto rounded-lg bg-gray-500 px-4 py-2 font-medium text-white shadow-xl hover:bg-gray-700"
-        >Cancel</button
-      >
-      <button
-        class="w-auto rounded-lg bg-purple-500 px-4 py-2 font-medium text-white shadow-xl hover:bg-purple-700"
-        >Create</button
-      >
-    </div>
-  </div>
-</div>
-
-
-
-
- -->
 </div>

@@ -37,11 +37,11 @@ export function Init() {
     }
 
     const scrollHandler = setTimeout(() => {
-      const pos = window.scrollY;
-      const delta = pos - prevPos;
-      const scrollDirection = Math.sign(delta) === -1;
+      const pos = window.scrollY
+      const delta = pos - prevPos
+      const scrollDirection = Math.sign(delta) === -1
       const isBottom =
-        pos + window.innerHeight > document.body.offsetHeight - 100;
+        pos + window.innerHeight > document.body.offsetHeight - 100
       const isTop = pos < 100;
 
       if (delta < -15 || delta > 15) {
@@ -53,14 +53,14 @@ export function Init() {
       flip("data-is-top", isTop);
 
       prevPos = pos;
-    }, 20);
+    }, 20)
 
-    window.addEventListener("scroll", () => scrollHandler, { passive: true });
+    window.addEventListener("scroll", () => scrollHandler, { passive: true })
     /* PARALLAX ANIMATIONS */
-    const parallaxReveal = document.querySelectorAll(".nebulix-parallax");
+    const parallaxReveal = document.querySelectorAll(".nebulix-parallax")
     if (!document.documentElement.dataset.ios) {
       parallaxReveal.forEach((el) => {
-        const img = el.querySelector(".parallax");
+        const img = el.querySelector(".parallax")
 
         img?.animate(
           {
@@ -72,60 +72,34 @@ export function Init() {
             rangeStart: { rangeName: "exit", offset: CSS.percent(5) },
             rangeEnd: { rangeName: "exit", offset: CSS.percent(100) },
           },
-        );
-      });
+        )
+      })
     }
-    function showContactdialog(contactdialog) {
-      contactdialog.classList.add(`visible`);
-      contactdialog.classList.remove(`invisible`);
-      contactdialog.classList.remove(`hidden`);
-      contactdialog.style.display = "block";
-      contactdialog.classList.remove(`opacity-0`);
-      contactdialog.classList.add(`opacity-100`);
-    }
-    function hideContactdialog(contactdialog) {
-      contactdialog.classList.remove(`visible`);
-      contactdialog.classList.add(`invisible`);
-      contactdialog.classList.add(`hidden`);
-      contactdialog.style.display = "none";
-      contactdialog.classList.remove(`opacity-100`);
-      contactdialog.classList.add(`opacity-0`);
-      
-    }
-    /* CONTACT FORM */
-    const contactButtons = document.querySelectorAll(`[href='#${contact_dialog_html_elt_id}']`);
-    console.log(` [Init.tsx] -`)
-    console.log(` [Init.tsx] -`)
-    console.log(` [Init.tsx] - contactButtons : `, contactButtons)
-    const contactdialog = document.getElementById(`${contact_dialog_html_elt_id}`)
 
-    if (!!contactdialog) {
-      contactdialog.style.display = "block";
-    }
+    /*
+      ContactDialog inits
+    */
+    /* CONTACT BUTTON OPEN MODAL */
+    const contactButtons = document.querySelectorAll(`[href='#${contact_dialog_html_elt_id}']`)
+    console.log(` [Init.tsx] - contactButtons : `, contactButtons[0])
+    /* CONTACTFORM BUTTON CLOSE MODAL */
+    const closeDialog = document.getElementById('closePestoContactModalBtn')
+
+    closeDialog?.addEventListener("click", () => { 
+      console.log("click")
+      document.getElementById(`${contact_dialog_html_elt_id}`)?.classList.toggle("invisible")
+    })
+
     contactButtons.forEach((el) => {
       el.addEventListener("click", (e) => {
         console.log(` [Init.tsx] - click CONTACT EVENT`)
         e.preventDefault();
         const contactdialog = document.getElementById(`${contact_dialog_html_elt_id}`)
-        /*
-        contactdialog?.classList.add(`visible`)
-        contactdialog?.classList.remove(`invisible`)
-        contactdialog?.classList.toggle(`hidden`)
-        contactdialog?.classList.toggle(`overflow-x-hidden`)
-        */
-        // contactdialog?.style.display = 'block';
-
-        // id={`${contact_dialog_html_elt_id}Label`}
-
-        /// showContact.set(true); // uses the store we want to get rid of
+        contactdialog?.classList.toggle("invisible")
+      
         console.log(` [Init.tsx] - click CONTACT EVENT >> contactdialog.style.display = ${JSON.stringify({display: `[${contactdialog?.style.display}]`})}`)
-        if ((!!contactdialog) && (contactdialog.style.display == "none")) {
-          showContactdialog(contactdialog)
-        } else if ((!!contactdialog) && (contactdialog.style.display == "block")) {
-          hideContactdialog(contactdialog)
-        }
-      });
-    });
+      })
+    })
   }, [])
 
   return (
