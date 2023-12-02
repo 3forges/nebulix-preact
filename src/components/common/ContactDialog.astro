@@ -24,6 +24,23 @@ const animation = `image_${imageName}`;
 
 <script>
   let in_scrp_contact_dialog_html_elt_id = "pesto_contact_dialog";
+  function showContactdialog(contactdialog) {
+    contactdialog.classList.toggle(`visible`);
+    contactdialog.classList.toggle(`invisible`);
+    contactdialog.classList.toggle(`hidden`);
+    contactdialog.style.display = "block";
+    contactdialog.classList.remove(`opacity-0`);
+    contactdialog.classList.add(`opacity-100`);
+  }
+  function hideContactdialog(contactdialog) {
+    contactdialog.classList.toggle(`visible`);
+    contactdialog.classList.toggle(`invisible`);
+    contactdialog.classList.toggle(`hidden`);
+    contactdialog.style.display = "none";
+    contactdialog.classList.remove(`opacity-100`);
+    contactdialog.classList.add(`opacity-0`);
+    
+  }
   function handleClick(e) {
     console.log(" [ContactDialog.astro] - click CONTACT EVENT");
     e.preventDefault();
@@ -50,16 +67,12 @@ const animation = `image_${imageName}`;
 
       if (!!contactdialog && contactdialog.style.display == "none") {
         // contactdialog.style.display = "block";
-        contactdialog.classList.toggle(`visible`);
-        contactdialog.classList.toggle(`invisible`);
-        contactdialog.classList.toggle(`hidden`);
-        contactdialog.style.display = "block";
+
+        showContactdialog(contactdialog)
       } else if (!!contactdialog && contactdialog.style.display == "block") {
         // contactdialog.style.display = "block";
-        contactdialog.classList.toggle(`visible`);
-        contactdialog.classList.toggle(`invisible`);
-        contactdialog.classList.toggle(`hidden`);
-        contactdialog.style.display = "none";
+
+        hideContactdialog(contactdialog)
       }
     }
   }
@@ -85,10 +98,7 @@ const animation = `image_${imageName}`;
       console.log(
         " [ContactDialog.astro] - {handleClosePestoContactModalBtnClick} CONTACT EVENT - IT SHOULD NOW APPEAR",
       );
-      contactdialog.classList.toggle(`visible`);
-      contactdialog.classList.toggle(`invisible`);
-      contactdialog.classList.toggle(`hidden`);
-      contactdialog.style.display = "none";
+      hideContactdialog(contactdialog)
     }
   }
 
@@ -137,6 +147,9 @@ const animation = `image_${imageName}`;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
 }
+.bg-dark-blur {
+  @apply bg-dark bg-opacity-50 backdrop-blur-sm;
+}
 </style>
 
 <!-- Main modal -->
@@ -144,7 +157,7 @@ const animation = `image_${imageName}`;
   id={`${contact_dialog_html_elt_id}`}
   tabindex="-1"
   aria-hidden="true"
-  class="scrollbar-hide fixed top-0 z-50 m-auto h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden md:inset-0"
+  class="bg-dark-blur transition-opacity duration-1000 ease-in-out opacity-100 scrollbar-hide fixed top-0 z-50 m-auto h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden md:inset-0"
 >
   <div class="relative mx-auto mt-[8vh] max-h-full w-full max-w-2xl p-4">
 

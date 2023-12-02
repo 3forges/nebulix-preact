@@ -75,7 +75,23 @@ export function Init() {
         );
       });
     }
-
+    function showContactdialog(contactdialog) {
+      contactdialog.classList.add(`visible`);
+      contactdialog.classList.remove(`invisible`);
+      contactdialog.classList.remove(`hidden`);
+      contactdialog.style.display = "block";
+      contactdialog.classList.remove(`opacity-0`);
+      contactdialog.classList.add(`opacity-100`);
+    }
+    function hideContactdialog(contactdialog) {
+      contactdialog.classList.remove(`visible`);
+      contactdialog.classList.add(`invisible`);
+      contactdialog.classList.add(`hidden`);
+      contactdialog.style.display = "none";
+      contactdialog.classList.remove(`opacity-100`);
+      contactdialog.classList.add(`opacity-0`);
+      
+    }
     /* CONTACT FORM */
     const contactButtons = document.querySelectorAll(`[href='#${contact_dialog_html_elt_id}']`);
     console.log(` [Init.tsx] -`)
@@ -104,17 +120,9 @@ export function Init() {
         /// showContact.set(true); // uses the store we want to get rid of
         console.log(` [Init.tsx] - click CONTACT EVENT >> contactdialog.style.display = ${JSON.stringify({display: `[${contactdialog?.style.display}]`})}`)
         if ((!!contactdialog) && (contactdialog.style.display == "none")) {
-          // contactdialog.style.display = "block";
-          contactdialog.classList.toggle(`visible`)
-          contactdialog.classList.toggle(`invisible`)
-          contactdialog.classList.toggle(`hidden`)
-          contactdialog.style.display = "block"
+          showContactdialog(contactdialog)
         } else if ((!!contactdialog) && (contactdialog.style.display == "block")) {
-          // contactdialog.style.display = "block";
-          contactdialog.classList.toggle(`visible`)
-          contactdialog.classList.toggle(`invisible`)
-          contactdialog.classList.toggle(`hidden`)
-          contactdialog.style.display = "none"
+          hideContactdialog(contactdialog)
         }
       });
     });
