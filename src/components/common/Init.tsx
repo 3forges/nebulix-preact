@@ -1,6 +1,6 @@
 import { useEffect } from 'preact/compat'
 import { showContact } from "@src/store"
-import {contact_dialog_html_elt_id} from "./config"
+import { contact_dialog_html_elt_id } from "./config"
 export function Init() {
   const width = window.innerWidth
   const shown = false;
@@ -8,7 +8,7 @@ export function Init() {
     const root = document.documentElement;
     const html = document.getElementsByTagName("html")[0];
     const start = new Date().getTime();
-  
+
     /* GET TIME TO LOAD PAGE */
     window.onload = function () {
       const end = new Date().getTime();
@@ -27,15 +27,15 @@ export function Init() {
     setTimeout(() => {
       html.style["scroll-behavior"] = "smooth";
     }, 500);
-  
+
     /* SCROLL OBSERVER FOR PAGE */
     let prevPos = 0;
     let isScrollingUp = false;
-  
+
     function flip(attr, state) {
       root.setAttribute(attr, String(state));
     }
-  
+
     const scrollHandler = setTimeout(() => {
       const pos = window.scrollY;
       const delta = pos - prevPos;
@@ -43,25 +43,25 @@ export function Init() {
       const isBottom =
         pos + window.innerHeight > document.body.offsetHeight - 100;
       const isTop = pos < 100;
-  
+
       if (delta < -15 || delta > 15) {
         isScrollingUp = scrollDirection;
       }
-  
+
       flip("data-is-scrolling-up", isScrollingUp);
       flip("data-is-bottom", isBottom);
       flip("data-is-top", isTop);
-  
+
       prevPos = pos;
     }, 20);
-  
+
     window.addEventListener("scroll", () => scrollHandler, { passive: true });
     /* PARALLAX ANIMATIONS */
     const parallaxReveal = document.querySelectorAll(".nebulix-parallax");
     if (!document.documentElement.dataset.ios) {
       parallaxReveal.forEach((el) => {
         const img = el.querySelector(".parallax");
-  
+
         img?.animate(
           {
             transform: ["none", "translateY(30%)"],
@@ -75,26 +75,47 @@ export function Init() {
         );
       });
     }
-  
+
     /* CONTACT FORM */
     const contactButtons = document.querySelectorAll(`[href='#${contact_dialog_html_elt_id}']`);
     console.log(` [Init.tsx] -`)
     console.log(` [Init.tsx] -`)
     console.log(` [Init.tsx] - contactButtons : `, contactButtons)
+    const contactdialog = document.getElementById(`${contact_dialog_html_elt_id}`)
+
+    if (!!contactdialog) {
+      contactdialog.style.display = "block";
+    }
     contactButtons.forEach((el) => {
       el.addEventListener("click", (e) => {
         console.log(` [Init.tsx] - click CONTACT EVENT`)
         e.preventDefault();
         const contactdialog = document.getElementById(`${contact_dialog_html_elt_id}`)
+        /*
         contactdialog?.classList.add(`visible`)
         contactdialog?.classList.remove(`invisible`)
         contactdialog?.classList.toggle(`hidden`)
         contactdialog?.classList.toggle(`overflow-x-hidden`)
+        */
         // contactdialog?.style.display = 'block';
-        
+
         // id={`${contact_dialog_html_elt_id}Label`}
-        
+
         /// showContact.set(true); // uses the store we want to get rid of
+        console.log(` [Init.tsx] - click CONTACT EVENT >> contactdialog.style.display = ${JSON.stringify({display: `[${contactdialog?.style.display}]`})}`)
+        if ((!!contactdialog) && (contactdialog.style.display == "none")) {
+          // contactdialog.style.display = "block";
+          contactdialog.classList.toggle(`visible`)
+          contactdialog.classList.toggle(`invisible`)
+          contactdialog.classList.toggle(`hidden`)
+          contactdialog.style.display = "block"
+        } else if ((!!contactdialog) && (contactdialog.style.display == "block")) {
+          // contactdialog.style.display = "block";
+          contactdialog.classList.toggle(`visible`)
+          contactdialog.classList.toggle(`invisible`)
+          contactdialog.classList.toggle(`hidden`)
+          contactdialog.style.display = "none"
+        }
       });
     });
   }, [])

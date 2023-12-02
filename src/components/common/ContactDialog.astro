@@ -1,181 +1,345 @@
 ---
 // import { Loading } from "./Loading";
-import {contact_dialog_html_elt_id} from "./config"
+import { contact_dialog_html_elt_id } from "./config";
 
 // import { useState, useRef } from 'preact/compat'
 // const [isLoading, setIsLoading ] = useState<boolean>(false);
+// id={`${contact_dialog_html_elt_id}`}
 
+// let contact_dialog_html_elt_id = {contact_dialog_html_elt_id}
 
+import { Picture } from "astro-imagetools/components";
+// import contactImage from "@assets/cosmic_contact_settings.jpeg"
+const contactImage = "/src/assets/cosmic_contact_settings.jpeg";
+import ContactDialogForm from "./ContactDialogForm.astro"
+// import { getGridImageSizes } from "@util/helpers";
+// const sizes = getGridImageSizes(`sm`);
 ---
 
-<!-- Button trigger modal -->
-<!-- 
+<script>
+  let in_scrp_contact_dialog_html_elt_id = "pesto_contact_dialog";
+  function handleClick(e) {
+    console.log(" [ContactDialog.astro] - click CONTACT EVENT");
+    e.preventDefault();
+    // const contactdialog = document.getElementById(in_scrp_contact_dialog_html_elt_id);
+    const contactdialog = document.querySelector(
+      `#${in_scrp_contact_dialog_html_elt_id}`,
+    );
+    if (!!contactdialog) {
+      console.log(
+        " [ContactDialog.astro] - click CONTACT EVENT - contactdialog FULL OBJECT = ",
+        contactdialog,
+      );
+      console.log(
+        " [ContactDialog.astro] - click CONTACT EVENT - contactdialog.style.display = " +
+          JSON.stringify({ display: `[${contactdialog.style.display}]` }),
+      );
+      console.log(
+        " [ContactDialog.astro] - click CONTACT EVENT - IT SHOULD NOW APPEAR",
+      );
+      // contactdialog.classList.toggle("visible")
+      // contactdialog.classList.toggle("invisible")
+      // contactdialog.classList.toggle("hidden")
+      // contactdialog.style.display = "block"
+
+      if (!!contactdialog && contactdialog.style.display == "none") {
+        // contactdialog.style.display = "block";
+        contactdialog.classList.toggle(`visible`);
+        contactdialog.classList.toggle(`invisible`);
+        contactdialog.classList.toggle(`hidden`);
+        contactdialog.style.display = "block";
+      } else if (!!contactdialog && contactdialog.style.display == "block") {
+        // contactdialog.style.display = "block";
+        contactdialog.classList.toggle(`visible`);
+        contactdialog.classList.toggle(`invisible`);
+        contactdialog.classList.toggle(`hidden`);
+        contactdialog.style.display = "none";
+      }
+    }
+  }
+
+  function handleClosePestoContactModalBtnClick(e) {
+    console.log(
+      " [ContactDialog.astro] - {handleClosePestoContactModalBtnClick} CONTACT EVENT",
+    );
+    e.preventDefault();
+    // const contactdialog = document.getElementById(in_scrp_contact_dialog_html_elt_id);
+    const contactdialog = document.querySelector(
+      `#${in_scrp_contact_dialog_html_elt_id}`,
+    );
+    if (!!contactdialog) {
+      console.log(
+        " [ContactDialog.astro] - {handleClosePestoContactModalBtnClick} CONTACT EVENT - contactdialog FULL OBJECT = ",
+        contactdialog,
+      );
+      console.log(
+        " [ContactDialog.astro] - {handleClosePestoContactModalBtnClick} CONTACT EVENT - contactdialog.style.display = " +
+          JSON.stringify({ display: `[${contactdialog.style.display}]` }),
+      );
+      console.log(
+        " [ContactDialog.astro] - {handleClosePestoContactModalBtnClick} CONTACT EVENT - IT SHOULD NOW APPEAR",
+      );
+      contactdialog.classList.toggle(`visible`);
+      contactdialog.classList.toggle(`invisible`);
+      contactdialog.classList.toggle(`hidden`);
+      contactdialog.style.display = "none";
+    }
+  }
+
+  const btnPestoModal = document.querySelector("#btnPestoModal");
+  if (!!btnPestoModal) {
+    btnPestoModal.addEventListener("click", () => {
+      console.log("Hello, btnPestoModal, on client");
+    });
+    btnPestoModal.addEventListener("click", handleClick);
+  }
+
+  const closePestoContactModalBtn = document.querySelector(
+    "#closePestoContactModalBtn",
+  );
+  if (!!closePestoContactModalBtn) {
+    closePestoContactModalBtn.addEventListener("click", () => {
+      console.log("Hello, closePestoContactModalBtn, on client");
+    });
+    closePestoContactModalBtn.addEventListener(
+      "click",
+      handleClosePestoContactModalBtnClick,
+    );
+  }
+</script>
+
+<!-- Modal toggle -->
 <button
+  id="btnPestoModal"
+  data-modal-target="default-modal"
+  data-modal-toggle="default-modal"
+  class="block rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
   type="button"
-  class="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-  data-te-toggle="modal"
-  data-te-target="#pesto_contact_dialog"
-  data-te-ripple-init
-  data-te-ripple-color="light">
-  Launch demo modal
+>
+  Toggle modal
 </button>
- -->
-<!-- Modal -->
+
+<!-- Main modal -->
 <div
-  data-te-modal-init
-  class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
   id={`${contact_dialog_html_elt_id}`}
   tabindex="-1"
-  aria-labelledby={`${contact_dialog_html_elt_id}Label`}
-  aria-hidden="true">
-  <div
-    data-te-modal-dialog-ref
-    class="pointer-events-none relative w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[500px]">
-    <div
-      class="min-[576px]:shadow-[0_0.5rem_1rem_rgba(#000, 0.15)] pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none dark:bg-neutral-600">
-      <div
-        class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
-        <!--Modal title-->
-        <h5
-          class="text-xl font-medium leading-normal text-neutral-800 dark:text-neutral-200"
-          id="pesto_contact_dialogLabel">
-          Modal title
-        </h5>
-        <!--Close button-->
-        <button
-          type="button"
-          class="box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
-          data-te-modal-dismiss
-          aria-label="Close">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="h-6 w-6">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-      </div> 
+  aria-hidden="true"
+  class="transform-all fixed top-0 z-50 m-auto h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden md:inset-0"
+>
+  <div class="relative mx-auto mt-[8vh] max-h-full w-full max-w-2xl p-4">
 
-      <!--Modal body-->
-      <div class="relative flex-auto p-4" data-te-modal-body-ref>
-        
-<!-- component -->
+    <!-- Modal content -->
+    <div class="flex flex-col justify-between p-1 leading-normal">
+      <button
+      id="closePestoContactModalBtn"
+      type="button"
+      class="ms-auto mt-0 inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+      data-modal-hide="default-modal"
+    >
+      <svg
+        class="h-3 w-3"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 14 14"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"></path>
+      </svg>
+      <span class="sr-only">Close modal</span>
+    </button>
+    </div>
+    <a
+      href="#"
+      class="flex flex-col items-center rounded-lg border border-gray-200 shadow hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 md:max-w-xl md:flex-row"
+    >
+
+      <style>
+        img.astro-imagetools-img, .astro-imagetools-picture {
+          @apply rounded-xl rounded-t-xl blur;
+        }
+      </style>
+          
+
+      <Picture
+        className="object-cover transition-all border-4 w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
+        breakpoints={[
+          360, 390, 412, 601, 768, 820, 962, 1280, 1440, 1536, 1920,
+        ]}
+        src={contactImage}
+        alt={`Contact Us`}
+        layout="fullWidth"
+        aspect={`0.465`}
+        position="attention"
+        transition:animate={()=>{
+          console.log(` Voilà le [transition:animate] => `)
+        }}
+        transition:persist
+        transition:name="cart"
+        sizes={(breakpoints) => {
+          const maxWidth = breakpoints[breakpoints.length - 1];
+          return `(min-width: ${maxWidth}px) ${maxWidth}px, 100vw`;
+        }}
+      />
+      <div class="flex flex-col justify-between p-1 leading-normal">
+        <ContactDialogForm />
+      </div>
+    </a>
+    
+
+
+  </div>
+
+  <!--
+
+
 <div
-class="flex h-screen bg-gray-200 items-center justify-center  mt-32 mb-32">
-<div class="grid bg-white rounded-lg shadow-xl w-11/12 md:w-9/12 lg:w-1/2">
-  <div class="flex justify-center py-4">
-    <div class="flex bg-purple-200 rounded-full md:p-4 p-2 border-2 border-purple-300">
-      <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
-    </div>
-  </div>
-
-  <div class="flex justify-center">
-    <div class="flex">
-      <h1 class="text-gray-600 font-bold md:text-2xl text-xl">Tailwind Form</h1>
-    </div>
-  </div>
-
-  <div class="grid grid-cols-1 mt-5 mx-7">
-    <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Input 1</label>
-    <input class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="text" placeholder="Input 1" />
-  </div>
-
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">
-    <div class="grid grid-cols-1">
-      <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Input 2</label>
-      <input class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="text" placeholder="Input 2" />
-    </div>
-    <div class="grid grid-cols-1">
-      <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Input 3</label>
-      <input class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="text" placeholder="Input 3" />
-    </div>
-  </div>
-
-  <div class="grid grid-cols-1 mt-5 mx-7">
-    <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Selection</label>
-    <select class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
-      <option>Option 1</option>
-      <option>Option 2</option>
-      <option>Option 3</option>
-    </select>
-  </div>
-
-  <div class="grid grid-cols-1 mt-5 mx-7">
-    <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Another Input</label>
-    <input class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="text" placeholder="Another Input" />
-  </div>
-
-  <div class="grid grid-cols-1 mt-5 mx-7">
-    <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold mb-1">Upload Photo</label>
-      <div class='flex items-center justify-center w-full'>
-          <label class='flex flex-col border-4 border-dashed w-full h-32 hover:bg-gray-100 hover:border-purple-300 group'>
-              <div class='flex flex-col items-center justify-center pt-7'>
-                <svg class="w-10 h-10 text-purple-400 group-hover:text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                <p class='lowercase text-sm text-gray-400 group-hover:text-purple-600 pt-1 tracking-wider'>Select a photo</p>
-              </div>
-            <input type='file' class="hidden" />
-          </label>
-      </div>
-  </div>
-
-  <div class='flex items-center justify-center  md:gap-8 gap-4 pt-5 pb-5'>
-    <button class='w-auto bg-gray-500 hover:bg-gray-700 rounded-lg shadow-xl font-medium text-white px-4 py-2'>Cancel</button>
-    <button class='w-auto bg-purple-500 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2'>Create</button>
-  </div>
-
-</div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      </div>
-
-      <!--Modal footer-->
+   class={`mb-32 mt-32 flex h-screen items-center justify-center bg-gray-200`}>
+  <div class="grid w-11/12 rounded-lg bg-white shadow-xl md:w-9/12 lg:w-1/2">
+    <div class="flex justify-center py-4">
       <div
-        class="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
-        <button
-          type="button"
-          class="inline-block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-100 focus:bg-primary-accent-100 focus:outline-none focus:ring-0 active:bg-primary-accent-200"
-          data-te-modal-dismiss
-          data-te-ripple-init
-          data-te-ripple-color="light">
-          Close
-        </button>
-        <button
-          type="button"
-          class="ml-1 inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-          data-te-ripple-init
-          data-te-ripple-color="light">
-          Save changes
-        </button>
+        class="flex rounded-full border-2 border-purple-300 bg-purple-200 p-2 md:p-4"
+      >
+        <svg
+          class="h-8 w-8 text-white"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+          ><path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+          ></path></svg
+        >
       </div>
     </div>
+
+    <div class="flex justify-center">
+      <div class="flex">
+        <h1 class="text-xl font-bold text-gray-600 md:text-2xl">
+          Tailwind Form
+        </h1>
+      </div>
+    </div>
+
+    <div class="mx-7 mt-5 grid grid-cols-1">
+      <label
+        class="text-xs font-semibold uppercase text-gray-500 text-light md:text-sm"
+        >Input 1</label
+      >
+      <input
+        class="mt-1 rounded-lg border-2 border-purple-300 px-3 py-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600"
+        type="text"
+        placeholder="Input 1"
+      />
+    </div>
+
+    <div class="mx-7 mt-5 grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-8">
+      <div class="grid grid-cols-1">
+        <label
+          class="text-xs font-semibold uppercase text-gray-500 text-light md:text-sm"
+          >Input 2</label
+        >
+        <input
+          class="mt-1 rounded-lg border-2 border-purple-300 px-3 py-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600"
+          type="text"
+          placeholder="Input 2"
+        />
+      </div>
+      <div class="grid grid-cols-1">
+        <label
+          class="text-xs font-semibold uppercase text-gray-500 text-light md:text-sm"
+          >Input 3</label
+        >
+        <input
+          class="mt-1 rounded-lg border-2 border-purple-300 px-3 py-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600"
+          type="text"
+          placeholder="Input 3"
+        />
+      </div>
+    </div>
+
+    <div class="mx-7 mt-5 grid grid-cols-1">
+      <label
+        class="text-xs font-semibold uppercase text-gray-500 text-light md:text-sm"
+        >Selection</label
+      >
+      <select
+        class="mt-1 rounded-lg border-2 border-purple-300 px-3 py-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600"
+      >
+        <option>Option 1</option>
+        <option>Option 2</option>
+        <option>Option 3</option>
+      </select>
+    </div>
+
+    <div class="mx-7 mt-5 grid grid-cols-1">
+      <label
+        class="text-xs font-semibold uppercase text-gray-500 text-light md:text-sm"
+        >Another Input</label
+      >
+      <input
+        class="mt-1 rounded-lg border-2 border-purple-300 px-3 py-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600"
+        type="text"
+        placeholder="Another Input"
+      />
+    </div>
+
+    <div class="mx-7 mt-5 grid grid-cols-1">
+      <label
+        class="mb-1 text-xs font-semibold uppercase text-gray-500 text-light md:text-sm"
+        >Upload Photo</label
+      >
+      <div class="flex w-full items-center justify-center">
+        <label
+          class="group flex h-32 w-full flex-col border-4 border-dashed hover:border-purple-300 hover:bg-gray-100"
+        >
+          <div class="flex flex-col items-center justify-center pt-7">
+            <svg
+              class="h-10 w-10 text-purple-400 group-hover:text-purple-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+              ></path></svg
+            >
+            <p
+              class="pt-1 text-sm lowercase tracking-wider text-gray-400 group-hover:text-purple-600"
+            >
+              Select a photo
+            </p>
+          </div>
+          <input type="file" class="hidden" />
+        </label>
+      </div>
+    </div>
+
+    <div class="flex items-center justify-center gap-4 pb-5 pt-5 md:gap-8">
+      <button
+        class="w-auto rounded-lg bg-gray-500 px-4 py-2 font-medium text-white shadow-xl hover:bg-gray-700"
+        >Cancel</button
+      >
+      <button
+        class="w-auto rounded-lg bg-purple-500 px-4 py-2 font-medium text-white shadow-xl hover:bg-purple-700"
+        >Create</button
+      >
+    </div>
   </div>
+</div>
+
+
+
+
+ -->
 </div>
