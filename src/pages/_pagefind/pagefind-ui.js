@@ -1,6 +1,6 @@
 import type { APIContext } from "astro"
 
-export async function PageFindUI({}: APIContext) {
+export async function get({}: APIContext) {
   return {
     body: 'export const search = () => {return {results: []}}'
   }

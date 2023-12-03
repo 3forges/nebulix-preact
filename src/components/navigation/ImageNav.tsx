@@ -1,10 +1,12 @@
 import React from 'preact/compat'
 import "./ImageNav.module.css"
 
+/*
 interface propsType {
   translations: Object,
   children: any
 };
+*/
 
 export function ImageNav(props: any) {
   //console.log("ImageNav props: ", props)
@@ -52,13 +54,13 @@ return (
     <div
       class="fade-in pointer-events-none z-50 w-full"
     >
-      <a onClick={prev} class="pointer-events-auto m-4">
+      <a onClick={prev} class="pointer-events-auto m-4 z-50">
         { props.prev }
       </a>
-      <a class="pointer-events-auto">
+      <a class="z-20">
         { props.panzoom }
       </a>
-      <a onClick={next} class="pointer-events-auto m-4">
+      <a onClick={next} class="pointer-events-auto m-4 z-50">
         { props.next }
       </a>
               

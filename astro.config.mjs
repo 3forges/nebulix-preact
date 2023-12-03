@@ -80,8 +80,7 @@ export default defineConfig({
       Image: false,
       JavaScript: true,
       SVG: true,
-    }),
-    
+    }),    
   ],
   markdown: {
     extendDefaultPlugins: true,
@@ -113,7 +112,6 @@ export default defineConfig({
         external: [
           "/_pagefind/pagefind.js",
           "/_pagefind/pagefind-ui.js",
-          "/_pagefind/pagefind-ui.css",
         ],
       },
       assetsInlineLimit: 10096,

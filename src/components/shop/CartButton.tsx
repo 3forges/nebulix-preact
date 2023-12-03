@@ -44,17 +44,20 @@ export function CartButton({ children, label = `default label of card button`, o
     return count.value>0
   }
   useEffect(() => {
-    document.addEventListener("snipcart.ready", () => {
-      Snipcart.store.subscribe(() => {
-        console.log("Subscribe")
-        // count.value = Snipcart.store.getState().cart.items.count;
-        setCount({
-          value: Snipcart.store.getState().cart.items.count,
-        })
-        setShoppingState(Snipcart.store.getState());
+    if (btn.current) {
+      console.log("Add snipcart.ready listener")
+      document.addEventListener("snipcart.ready", () => {
+        Snipcart.store.subscribe(() => {
+          console.log("Subscribe")
+          // count.value = Snipcart.store.getState().cart.items.count;
+          setCount({
+            value: Snipcart.store.getState().cart.items.count,
+          })
+          setShoppingState(Snipcart.store.getState());
+        });
       });
-    });
-    btn.current.setAttribute(`${option}`, `${value}`); 
+      btn.current.setAttribute(`${option}`, `${value}`); 
+    }
   }, []);
 
   const afterCartCounterTw = `` // `absolute -right-2 top-0 grid h-4 w-4 place-items-center rounded-full border-2 border-current bg-opacity-70 font-bold md:top-1` 

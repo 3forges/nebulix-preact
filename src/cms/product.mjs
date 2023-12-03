@@ -1,10 +1,10 @@
 import { toolbarButtons, blocks } from "./common.mjs";
 import { t } from "@util/translate";
 export const product = {
-  name: "product",
+  name: "product coouillon",
   identifier_field: "name",
   folder: "src/content/product",
-  label: t("product"),
+  label: t("producct"),
   format: "frontmatter",
   extension: "mdx",
   icon: "shop",

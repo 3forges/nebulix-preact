@@ -1,6 +1,7 @@
 import { useEffect } from 'preact/compat'
 import { showContact } from "@src/store"
 import { contact_dialog_html_elt_id } from "./config"
+
 export function Init() {
   const width = window.innerWidth
   const shown = false;
@@ -18,6 +19,7 @@ export function Init() {
         `${Math.round(timeTaken / 1000)}`,
       );
     };
+    
     /* CHECK IF IS IOS DEVICE */
     const ua = navigator.userAgent;
     if (/iPad|iPhone|iPod/.test(ua)) {
@@ -36,7 +38,9 @@ export function Init() {
       root.setAttribute(attr, String(state));
     }
 
-    const scrollHandler = setTimeout(() => {
+    let scrollHandlerTO
+    function debounce() {    
+      console.log('scrollHandler')  
       const pos = window.scrollY
       const delta = pos - prevPos
       const scrollDirection = Math.sign(delta) === -1
@@ -53,9 +57,15 @@ export function Init() {
       flip("data-is-top", isTop);
 
       prevPos = pos;
-    }, 20)
+    }
 
-    window.addEventListener("scroll", () => scrollHandler, { passive: true })
+    const scrollHandler = () => {
+      console.log('debounce')
+      clearTimeout(scrollHandlerTO)
+      scrollHandlerTO = setTimeout(debounce, 20)
+    }
+
+    window.addEventListener("scroll", () => {scrollHandler}, { passive: true })
     /* PARALLAX ANIMATIONS */
     const parallaxReveal = document.querySelectorAll(".nebulix-parallax")
     if (!document.documentElement.dataset.ios) {

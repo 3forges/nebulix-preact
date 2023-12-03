@@ -76,6 +76,11 @@ const animation = `image_${imageName}`;
         breakpoints={[
           360, 390, 412, 601, 768, 820, 962, 1280, 1440, 1536, 1920,
         ]}
+        attributes={{ //omy gosh : https://github.com/RafidMuhymin/astro-imagetools/issues/18#issuecomment-1146516898
+          img: {
+            class: 'rounded-l-lg'
+          }
+        }}
         src={contactImage}
         alt={`Contact Us`}
         layout="fullWidth"

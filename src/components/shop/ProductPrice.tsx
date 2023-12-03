@@ -23,7 +23,7 @@ export function ProductPrice(props: PropsType ) {
   return(
     <>
       <div class="grid gap-0 text-right leading-none">
-        <span class={ props.offer > 0 ? 'muted text-xs text-danger line-through' : ''}>
+        <span class={ props.offer > 0 ? 'muted text-xs text-warning line-through' : ''}>
           { Price }
         </span>
         { props.offer > 0 && <span>{ OfferPrice }</span> }

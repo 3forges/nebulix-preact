@@ -14,6 +14,7 @@ cd src && ls -R | grep .vue
     *  => rangeStart ???
   * from src/layouts/BaseLayout.astro
   * 2 errors
+  ok
 
 * - src/components/common/Intersecting.vue
   * src/components/block/Features.astro
@@ -94,3 +95,13 @@ src/components/media/Youtube.vue
 * menu
   * button aria-label="Sulphur Dioxide"
     * => Background and foreground colors do not have a sufficient contrast ratio.
+
+## menu bug
+
+le menu ne reagit plus au scroll
+le menu peut disparaitre (une fois la page scrollée)
+scrolldown une page + F5
+  => la barre apparait puis se retracte
+
+
+## transition pour ContactDialog
