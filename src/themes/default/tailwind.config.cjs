@@ -1,8 +1,8 @@
 /** @type {import('tailwindcss').Config} */
-const plugin = require("tailwindcss/plugin");
-/***/
-const pestoConfig = require('./src/themes/pesto/tailwind.config.cjs');
-//const defaultConfig = require('./src/themes/default/tailwind.config.cjs');
+/**
+ * const Config = require('./src/themes/pesto/tailwind.config.cjs');
+ */
+const postcssConfig = require('./../../../postcss.config.cjs');
 
 module.exports = {
   darkMode: ["class", '[data-theme="dark"]'],
@@ -14,7 +14,6 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        /** */
         primary: "rgb(var(--color-primary) / <alpha-value>)",
         secondary: "rgb(var(--color-secondary) / <alpha-value>)",
         accent: "rgb(var(--color-accent) / <alpha-value>)",
@@ -24,10 +23,7 @@ module.exports = {
         light: "rgb(var(--color-light) / <alpha-value>)",
         dark: "rgb(var(--color-dark) / <alpha-value>)",
         info: "rgb(var(--color-info) / <alpha-value>)",
-        /** */
-        ...pestoConfig.theme.extend.colors,
-
-       },
+      },
       fontFamily: {
         sans: ["'Inter Tight Variable'", "Helvetica", "Verdana", "sans-serif"],
         body: ["'Inter Tight Variable'", "Helvetica", "Verdana", "sans-serif"],

@@ -5,14 +5,16 @@ import { Picture } from "astro-imagetools/components";
 import BaseHead from "@components/BaseHead.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
+// import Init from "@components/common/Init.vue";
 import { Init } from "@components/common/Init";
+import {SnipCartInit} from "@components/shop/SnipCartInit";
+//import ContactDialog from "@components/common/ContactDialog.vue";
+//import {ContactDialog} from "@components/common/ContactDialog";
 import ContactDialog from "@components/common/ContactDialog.astro";
 import { Icon } from "astro-icon";
 import { t } from "@util/translate";
 import "@fontsource-variable/inter-tight";
 import "@fontsource-variable/inter-tight/wght-italic.css";
-//import SnipCartInit from "@components/shop/SnipCartInit.astro";
-import {SnipCartInit} from "@components/shop/SnipCartInit";
 
 const lang = import.meta.env.WEBSITE_LANGUAGE;
 const currency = import.meta.env.CURRENCY;
@@ -31,9 +33,6 @@ const contact = await getEntry("config", "contact");
       description={description}
       thumbnail={!!og_image ? og_image : thumbnail}
     />
-    <script is:inline>
-      console.log("BaseLayout")
-    </script>
   </head>
   <body class={`surface-base ${pageClass || ""}`}>
     {

@@ -6,7 +6,7 @@
     --color-secondary: 107 154 199;
     --color-accent: 119 112 150;
     --color-warning: 202 121 45;
-    --color-danger: 120 5 0;
+    --color-danger: 180 25 14;
     --color-success: 77 137 101;
     --color-dark: 25 28 38;
     --color-light: 243 241 239;
@@ -19,8 +19,8 @@
     --w-sm: 40rem;
     --w-container: 55rem;
 
-    --popper-theme-background-color: theme(colors.primary);
-    --popper-theme-background-color-hover: theme(colors.primary);
+    --popper-theme-background-color: theme(colors.primary.50);
+    --popper-theme-background-color-hover: theme(colors.primary.50);
     --popper-theme-text-color: theme(colors.light);
     --popper-theme-border-width: 0px;
     --popper-theme-border-style: solid;
@@ -49,8 +49,8 @@
 body {
   --toastify-color-light: theme(colors.light);
   --toastify-color-dark: theme(colors.dark);
-  --toastify-color-info: theme(colors.primary);
-  --toastify-color-success: theme(colors.primary);
+  --toastify-color-info: theme(colors.primary.700);
+  --toastify-color-success: theme(colors.primary.900);
   --toastify-color-warning: theme(colors.warning);
   --toastify-color-error: theme(colors.danger);
 }
@@ -60,20 +60,20 @@ body {
 }
 
 .surface-primary {
-  @apply bg-primary text-white dark:text-white;
+  @apply bg-primary-200 text-white dark:text-white;
   a:not([class]) {
     @apply text-light;
   }
 }
 
 .surface-secondary {
-  @apply bg-secondary text-dark;
+  @apply bg-secondary-600 text-dark;
   a:not([class]) {
     @apply text-dark;
   }
 }
 .surface-accent {
-  @apply bg-accent text-light;
+  @apply bg-accent-600 text-light;
   a:not([class]) {
     @apply text-light;
   }
@@ -109,7 +109,7 @@ body {
 }
 
 .surface-menu {
-  @apply bg-light bg-opacity-90 text-primary  dark:bg-dark dark:bg-opacity-90;
+  @apply bg-light bg-opacity-90 text-primary-700  dark:bg-dark dark:bg-opacity-90;
   .nav-links {
     @apply text-dark dark:text-white;
   }
@@ -313,7 +313,7 @@ body {
     all: unset;
   }
   blockquote {
-    @apply mx-0 my-8 border-l-4 border-primary py-0 pl-8 pr-0 text-2xl font-semibold italic;
+    @apply mx-0 my-8 border-l-4 border-primary-400 py-0 pl-8 pr-0 text-2xl font-semibold italic;
   }
   ul:not([class]) {
     @apply list-disc;
@@ -330,7 +330,7 @@ body {
       @apply py-2;
       text-wrap: balance;
       &::marker {
-        @apply text-primary;
+        @apply text-primary-950;
       }
     }
     ul,
@@ -475,7 +475,7 @@ a.link-underline {
   --pagefind-ui-primary: theme(colors.light);
   --pagefind-ui-fade: theme(colors.light / 0.3);
   --pagefind-ui-text: theme(colors.light);
-  --pagefind-ui-background: theme(colors.primary);
+  --pagefind-ui-background: theme(colors.primary.500);
   --pagefind-ui-border: theme(colors.light / 0.3);
   --pagefind-ui-tag: theme(colors.light / 0.3);
   --pagefind-ui-border-width: 0;
