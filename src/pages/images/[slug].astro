@@ -8,8 +8,9 @@ import { toHeaderCase } from "js-convert-case";
 import {ImageNav} from "@components/navigation/ImageNav"
 import {PanZoom} from "@components/media/PanZoom"
 import {CartButton} from "@components/shop/CartButton"
+// last .vue
+// import SnipCart from "@components/shop/SnipCartInit.vue";
 import {SnipCartInit} from "@components/shop/SnipCartInit";
-//import SnipCartInit from "@components/shop/SnipCartInit.astro";
 
 const snipcartKey = import.meta.env.SNIPCART_KEY;
 
@@ -49,27 +50,25 @@ const title = toHeaderCase(slug);
 <html lang="en" data-pagefind-ignore="all">
   <head>
     <BaseHead title={title} description={`${t("image")}: ${title}`} />
-    <script is:inline>
-      console.log("[slug].astro")
-    </script>
   </head>
   <body class="surface-dark relative grid h-screen w-full place-items-center">
     {
       snipcartKey && (
         <div class="-z-50 hidden">
-          <SnipCartInit
-            snipcartKey={snipcartKey}
-            client:only="preact"
-          />
           <CartButton
             label={t("cart")}
-            client:only="preact"
+            client:idle
             transition:persist
             transition:name="cart"
           >
             <Icon name="shopping-cart" class="h-6 w-6" slot="cart" />
           </CartButton>
-
+          <SnipCartInit
+            transition:persist
+            transition:name="snipcart-base"
+            snipcartKey={snipcartKey}
+            client:idle
+          />
         </div>
       )
     }

@@ -20,7 +20,7 @@ export function NavMobile(props: any) {
       <button
         aria-label={show ? props.translations.close : props.translations.menu}
         onMouseDown={toggleMenu}
-        class={` ${style.navMobileBtn} relative  ml-auto flex  text-primary md:hidden ${
+        class={` ${style.navMobileBtn} relative  ml-auto flex  text-primary-700 md:hidden ${
           show ? 'bg-transparent ' : 'bg-blue'
         }`}
       >

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="loading absolute inset-0 grid place-items-center text-primary backdrop-opacity-50"
+    class="loading absolute inset-0 grid place-items-center text-primary-700 backdrop-opacity-50"
     v-if="loading"
   >
     <svg

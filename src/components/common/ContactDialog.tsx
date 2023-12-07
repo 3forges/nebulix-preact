@@ -168,7 +168,9 @@ export const ContactDialog = (props: any) => {
     */
     return (
         <>
-
+          {//<Transition name="fade">
+          // ${showContact ? 'visible' : 'invisible'}
+          }
     <div id={`${contact_dialog_html_elt_id}`}
       style={toastify}
       class={`invisible ${Styles.dialog} transition-["invisible"] duration-500 bg-dark-blur z-1000 dialog pointer-events-auto fixed inset-0 grid w-full cursor-pointer place-items-center`}
@@ -192,7 +194,7 @@ export const ContactDialog = (props: any) => {
               </div>
             
               <div
-                class={`${Styles.input-group} z-20 w-full`}
+                class={`${Styles["input-group"]} z-20 w-full`}
                 /* v-if="contact.topics.length > 1" */
                 >
                 <button
@@ -223,11 +225,11 @@ export const ContactDialog = (props: any) => {
                     </ul>
                     )
                   }
-                  <div class="tooltip-arrow" data-popper-arrow></div>
+                  <div class={"tooltip-arrow"} data-popper-arrow></div>
               </div>
               <div>
                 <label
-                  class="peer-placeholder-shown:left-4 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-9 peer-focus:scale-75 peer-focus:text-primary"
+                  class="peer-placeholder-shown:left-4 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-9 peer-focus:scale-75 peer-focus:text-primary-700"
                   >{ t(topic?topic.name:`default topic`) } *
                 </label>
                 
@@ -243,7 +245,7 @@ export const ContactDialog = (props: any) => {
                   value={contact.name}
                 />
                 <label
-                  class="peer-placeholder-shown:left-4 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-9 peer-focus:scale-75 peer-focus:text-primary"
+                  class="peer-placeholder-shown:left-4 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-9 peer-focus:scale-75 peer-focus:text-primary-700"
                   >{ t("name") } *</label>
               </div>
 
@@ -257,7 +259,7 @@ export const ContactDialog = (props: any) => {
                   value={contact.email}
                 />
                 <label
-                  class="peer-placeholder-shown:left-4 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-9 peer-focus:scale-75 peer-focus:text-primary"
+                  class="peer-placeholder-shown:left-4 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-9 peer-focus:scale-75 peer-focus:text-primary-700"
                   >{ t("email") } * </label>
               </div>
               <div class="input-group">
@@ -270,7 +272,7 @@ export const ContactDialog = (props: any) => {
                   value={contact.phone}
                 />
                 <label
-                  class="peer-placeholder-shown:left-4 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-9 peer-focus:scale-75 peer-focus:text-primary"
+                  class="peer-placeholder-shown:left-4 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-9 peer-focus:scale-75 peer-focus:text-primary-700"
                   >{ t("phone") }</label>
               </div>
               <div class="input-group">
@@ -284,7 +286,7 @@ export const ContactDialog = (props: any) => {
                   // ref="textarea"
                 ></textarea>
                 <label
-                  class="peer-placeholder-shown:left-4 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-9 peer-focus:scale-75 peer-focus:text-primary"
+                  class="peer-placeholder-shown:left-4 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-9 peer-focus:scale-75 peer-focus:text-primary-700"
                   >{ t("Message") } *</label>
               </div>
               <div
@@ -311,6 +313,10 @@ export const ContactDialog = (props: any) => {
         </div>
       </div>
   
+          {//</Transition>
+          }
+
+
         </>
     )
 }
