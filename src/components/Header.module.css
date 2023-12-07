@@ -1,0 +1,45 @@
+@tailwind base;
+
+@layer base {
+  .nav {
+    @apply transition-transform duration-500;
+    ul {
+      --_gap: 1rem;
+    }
+    .nav-underline li:not(ul li ul li) {
+      @apply relative overflow-hidden;
+      padding: calc(var(--_gap) / 2);
+      min-inline-size: 1.3rem;
+
+      &::after {
+        @apply absolute rounded-full bg-primary-500;
+        content: "";
+        inset-inline: 0;
+        inset-block-end: 0;
+        block-size: 5px;
+
+        translate: var(--_translate, 0);
+        scale: var(--_scale, 0) 1;
+        transition:
+          scale 100ms var(--_scale-delay, 0ms),
+          translate 200ms,
+          color 200ms;
+      }
+      &:hover ~ li {
+        --_translate: -100%;
+        --_scale-delay: 200ms;
+      }
+    }
+    &:hover li {
+      --_translate: 100%;
+      --_scale-delay: 200ms;
+    }
+
+    li:hover {
+      --_scale: 1;
+      --_translate: 0;
+      --_scale-delay: 0ms;
+      @apply text-primary-800;
+    }
+  }
+}

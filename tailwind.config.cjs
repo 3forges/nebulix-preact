@@ -1,11 +1,20 @@
 /** @type {import('tailwindcss').Config} */
 const plugin = require("tailwindcss/plugin");
+/***/
+const pestoConfig = require('./src/themes/pesto/tailwind.config.cjs');
+//const defaultConfig = require('./src/themes/default/tailwind.config.cjs');
+
 module.exports = {
   darkMode: ["class", '[data-theme="dark"]'],
-  content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
+  content: [
+    "./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}",
+    "./node_modules/flowbite/**/*.js",
+    // 'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}',
+  ], // <script src="./node_modules/flowbite-react/dist/flowbite.min.js"></script>
   theme: {
     extend: {
       colors: {
+        /** */
         primary: "rgb(var(--color-primary) / <alpha-value>)",
         secondary: "rgb(var(--color-secondary) / <alpha-value>)",
         accent: "rgb(var(--color-accent) / <alpha-value>)",
@@ -15,7 +24,10 @@ module.exports = {
         light: "rgb(var(--color-light) / <alpha-value>)",
         dark: "rgb(var(--color-dark) / <alpha-value>)",
         info: "rgb(var(--color-info) / <alpha-value>)",
-      },
+        /** */
+        ...pestoConfig.theme.extend.colors,
+
+       },
       fontFamily: {
         sans: ["'Inter Tight Variable'", "Helvetica", "Verdana", "sans-serif"],
         body: ["'Inter Tight Variable'", "Helvetica", "Verdana", "sans-serif"],
@@ -35,5 +47,6 @@ module.exports = {
         html: { fontSize: "16px" },
       });
     }),
+    require('flowbite/plugin'),
   ],
-};
+}

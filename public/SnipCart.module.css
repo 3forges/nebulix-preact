@@ -1,89 +1,15 @@
-<template>
-  <div
-    ref="shop"
-    hidden
-    :data-config-load-css="false"
-    id="snipcart"
-    :data-api-key="props.snipcartKey"
-    data-config-modal-style="side"
-  ></div>
-  <link ref="style" type="text/css" rel="stylesheet" :href="styleSrc" />
-</template>
-
-<script setup>
-import { onMounted, ref, watchEffect } from "vue";
-import { usePointer } from "@vueuse/core";
-const shop = ref(null);
-const scripLoaded = ref(false);
-const pointer = usePointer();
-const styleSrc = ref("");
-const count = ref(0);
-
-const props = defineProps({
-  snipcartKey: String,
-});
-
-const stop = watchEffect(() => {
-  count.value++;
-
-  if (
-    (count.value > 1 && pointer.y.value) ||
-    pointer.x.value ||
-    pointer.isInside.value ||
-    pointer.pointerType.value ||
-    pointer.pressure.value ||
-    pointer.tiltX.value ||
-    pointer.twist.value ||
-    pointer.width.value ||
-    pointer.pointerId.value ||
-    pointer.tiltY.value
-  ) {
-    LoadJS();
-    loadCSS();
-    scripLoaded.value = true;
-    stop();
-  }
-});
-
-function LoadJS() {
-  let script = document.createElement("script");
-  script.type = "text/javascript";
-  script.src = "https://cdn.snipcart.com/themes/v3.7.1/default/snipcart.js";
-  if (!scripLoaded.value) {
-    document.head.appendChild(script);
-  }
-}
-
-function loadCSS() {
-  if (!scripLoaded.value) {
-    styleSrc.value = "/snipcart.css";
-  }
-}
-
-onMounted(() => {
-  if (!window.Snipcart) {
-    setTimeout(() => {
-      LoadJS();
-      loadCSS();
-      scripLoaded.value = true;
-    }, 2500);
-  }
-});
-</script>
-
-<style is:global>
 #snipcart {
   /* ----------------- 
         Colors
     ----------------- */
   --color-default: theme(colors.dark);
   --color-alt: theme(colors.gray.400);
-  --color-icon: theme(colors.primary);
+  --color-icon: theme(colors.primary.500);
   --color-success: theme(colors.success);
   --color-error: theme(colors.danger);
 
-  --color-link: theme(colors.primary);
-  --color-link-hover: theme(colors.accent);
+  --color-link: theme(colors.primary.500);
+  --color-link-hover: theme(colors.accent.700);
   --color-link-active: var(--color-link);
   --color-link-focus: var(--color-link);
 
@@ -111,7 +37,7 @@ onMounted(() => {
   --color-buttonPrimary-success: var(--color-buttonPrimary);
   --color-buttonPrimary-error: var(--color-buttonPrimary);
 
-  --color-buttonSecondary: theme(colors.primary);
+  --color-buttonSecondary: theme(colors.primary.500);
   --color-buttonSecondary-hover: theme(colors.white);
   --color-buttonSecondary-active: var(--color-buttonSecondary);
   --color-buttonSecondary-focus: var(--color-buttonSecondary);
@@ -190,7 +116,7 @@ onMounted(() => {
   --bgColor-input-error: var(--bgColor-input);
   --bgColor-input-autofill: theme(colors.light);
 
-  --bgColor-buttonPrimary: theme(colors.primary);
+  --bgColor-buttonPrimary: theme(colors.primary.500);
   --bgColor-buttonPrimary-hover: theme(colors.white);
   --bgColor-buttonPrimary-active: var(--bgColor-buttonPrimary);
   --bgColor-buttonPrimary-focus: var(--bgColor-buttonPrimary);
@@ -199,7 +125,7 @@ onMounted(() => {
   --bgColor-buttonPrimary-error: theme(colors.danger);
 
   --bgColor-buttonSecondary: theme(colors.white);
-  --bgColor-buttonSecondary-hover: theme(colors.primary);
+  --bgColor-buttonSecondary-hover: theme(colors.primary.500);
   --bgColor-buttonSecondary-active: var(--bgColor-buttonSecondary);
   --bgColor-buttonSecondary-focus: var(--bgColor-buttonSecondary);
   --bgColor-buttonSecondary-disabled: theme(colors.gray.300);
@@ -214,9 +140,9 @@ onMounted(() => {
   --bgColor-buttonDanger-success: hsl(144, 66%, 30%);
   --bgColor-buttonDanger-error: hsl(6, 60%, 35%);
 
-  --bgColor-badge: theme(colors.accent);
-  --bgColor-badge-active: theme(colors.secondary);
-  --bgColor-badge-disabled: theme(colors.accent);
+  --bgColor-badge: theme(colors.accent.700);
+  --bgColor-badge-active: theme(colors.secondary.500);
+  --bgColor-badge-disabled: theme(colors.accent.700);
 
   /* ----------------- 
         Shadows
@@ -246,4 +172,3 @@ onMounted(() => {
   z-index: 9999;
   position: absolute;
 }
-</style>

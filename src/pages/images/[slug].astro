@@ -1,14 +1,16 @@
 ---
 import BaseHead from "@components/BaseHead.astro";
-import PanZoom from "@components/media/PanZoom.vue";
-import { toHeaderCase } from "js-convert-case";
-import ImageNav from "@components/navigation/ImageNav.vue";
 import { Icon } from "astro-icon";
 import { t } from "@util/translate";
 import { getImageTransitionName } from "@util/helpers";
 import { Picture } from "astro-imagetools/components";
-import SnipCart from "@components/shop/SnipCartInit.vue";
-import CartButton from "@components/shop/CartButton.vue";
+import { toHeaderCase } from "js-convert-case";
+import {ImageNav} from "@components/navigation/ImageNav"
+import {PanZoom} from "@components/media/PanZoom"
+import {CartButton} from "@components/shop/CartButton"
+// last .vue
+// import SnipCart from "@components/shop/SnipCartInit.vue";
+import {SnipCartInit} from "@components/shop/SnipCartInit";
 
 const snipcartKey = import.meta.env.SNIPCART_KEY;
 
@@ -59,9 +61,9 @@ const title = toHeaderCase(slug);
             transition:persist
             transition:name="cart"
           >
-            <Icon name="shopping-cart" class="h-6 w-6" />
+            <Icon name="shopping-cart" class="h-6 w-6" slot="cart" />
           </CartButton>
-          <SnipCart
+          <SnipCartInit
             transition:persist
             transition:name="snipcart-base"
             snipcartKey={snipcartKey}
@@ -71,27 +73,29 @@ const title = toHeaderCase(slug);
       )
     }
     <ImageNav
-      client:idle
+      client:only="preact"
       translations={{ next: t("next"), prev: t("prev"), close: t("close") }}
     >
-      <Icon name="close" class="w-8" slot="close" />
-      <Icon name="right" class="w-8" slot="next" />
-      <Icon name="left" class="w-8" slot="prev" />
+      <Icon name="close" class="absolute top-1 right-0 w-8" slot="close" />
+      <Icon name="right" class="absolute top-1/2 right-0 w-8" slot="next" />
+      <Icon name="left" class="absolute top-1/2 left-0 w-8" slot="prev" />
 
       <PanZoom
         alt={`image: ${title}`}
-        client:idle
+        client:only="preact"
         transition:name={`${getImageTransitionName(image)}`}
+        slot="panzoom"
       >
         <Picture
           src={image}
           alt={title}
-          attributes={{ img: { class: "max-h-screen " } }}
+          attributes={{ img: { class: "pointer-events-auto scale-50 -translate-y-[10%]" } }}
           breakpoints={[1000, 1280, 1440, 1536, 1920]}
           sizes="100vw"
           objectFit="contain"
           loading="eager"
           layout="fill"
+          slot="panzoomin"
         />
       </PanZoom>
     </ImageNav>

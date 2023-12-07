@@ -20,6 +20,8 @@ const m2dxOptions = {
   autoImports: true,
 };
 
+import preact from "@astrojs/preact";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://nebulix.unfolding.io",
@@ -27,6 +29,7 @@ export default defineConfig({
     mdx({}),
     sitemap(),
     tailwind(),
+    preact(), // added by Pesto Team
     vue({
       appEntrypoint: "/src/pages/_app",
     }),
@@ -77,8 +80,7 @@ export default defineConfig({
       Image: false,
       JavaScript: true,
       SVG: true,
-    }),
-    
+    }),    
   ],
   markdown: {
     extendDefaultPlugins: true,
@@ -102,12 +104,14 @@ export default defineConfig({
     ],
   },
   vite: {
+    ssr: {
+      external: ["svgo"] // added by Pesto Team
+    },
     build: {
       rollupOptions: {
         external: [
           "/_pagefind/pagefind.js",
           "/_pagefind/pagefind-ui.js",
-          "/_pagefind/pagefind-ui.css",
         ],
       },
       assetsInlineLimit: 10096,

@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
 import { Picture } from "astro-imagetools/components";
-import ProductVariationImageWrap from "@components/shop/ProductVariationImageWrap.vue";
+import {ProductVariationImageWrap} from "@components/shop/ProductVariationImageWrap";
 import Block from "@components/block/Block.astro";
 import { getImageUrl, getImageTransitionName } from "@util/helpers";
 import { t } from "@util/translate";
@@ -86,6 +86,7 @@ const hasBlocks = blocks && blocks.length > 0;
                   alt={image.label || "title"}
                   layout={isPng(image.thumbnail) ? "fill" : "fill"}
                   objectFit={isPng(image.thumbnail) ? "contain" : "cover"}
+                  slot="productImage"
                 />
               </ProductVariationImageWrap>
             ))

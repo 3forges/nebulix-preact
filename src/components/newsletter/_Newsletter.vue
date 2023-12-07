@@ -27,7 +27,8 @@
 import { ref, computed, reactive } from "vue";
 import { t } from "@util/translate";
 import { useAsyncValidator } from "@vueuse/integrations/useAsyncValidator";
-import Loading from "@components/common/Loading.vue";
+import {Loading} from "@components/common/Loading";
+// import {Loading} from "@components/common/Loading";
 import "vue3-toastify/dist/index.css";
 import { toast } from "vue3-toastify";
 const props = defineProps({
