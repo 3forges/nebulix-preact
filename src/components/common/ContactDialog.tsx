@@ -11,7 +11,7 @@ import {Loading} from "@components/common/Loading";
 //import {Loading} from "@components/common/Loading";
 import toastify from "vue3-toastify/dist/index.css";
 //import { toast } from "vue3-toastify";
-import styles from "./ContactDialog.module.css"
+import Styles from "./ContactDialog.module.css"
 
 import {
   disableBodyScroll,
@@ -173,7 +173,7 @@ export const ContactDialog = (props: any) => {
           }
     <div id={`${contact_dialog_html_elt_id}`}
       style={toastify}
-      class={`invisible ${styles.dialog} bg-dark-blur z-1000 dialog pointer-events-auto fixed inset-0 grid w-full cursor-pointer place-items-center`}
+      class={`invisible ${Styles.dialog} transition-["invisible"] duration-500 bg-dark-blur z-1000 dialog pointer-events-auto fixed inset-0 grid w-full cursor-pointer place-items-center`}
       onClick={hide}
     >
       <div /*onClick.stop*/ class="container-md relative">
@@ -194,7 +194,7 @@ export const ContactDialog = (props: any) => {
               </div>
             
               <div
-                class="input-group z-20 w-full"
+                class={`${Styles["input-group"]} z-20 w-full`}
                 /* v-if="contact.topics.length > 1" */
                 >
                 <button
